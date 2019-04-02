@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ca.smartsauga.beans.CitizenUser;
 import ca.smartsauga.beans.Locations;
+import ca.smartsauga.dao.Dao;
 
 @RestController
 public class LoginController {
-	
+	Dao dao = new Dao();
 	
 	@CrossOrigin
 	@RequestMapping(value = "/validateUser/{email}/{password}", method = RequestMethod.POST)
