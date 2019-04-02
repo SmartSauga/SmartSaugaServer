@@ -13,16 +13,13 @@ import lombok.*;
 public class CitizenUser extends User {
 	
 	//Needs Status Enum eventually
-	private String userStatus;
 	private LocalDate joinDate;
 	private LocalDate lastLoggedDate;
 	
-	public CitizenUser(int userId, String email, String imageFileName, 
-			String userStatus, LocalDate joinDate, LocalDate lastLoggedDate) {
-		super(userId, email, imageFileName);
-		this.userStatus = userStatus;
-		this.joinDate = joinDate;
-		this.lastLoggedDate = lastLoggedDate;
+	public CitizenUser(String email, String imageFileName) {
+		super(email, imageFileName);
+		this.joinDate = LocalDate.now();
+		this.lastLoggedDate = LocalDate.now();
 		
 	}
 	
