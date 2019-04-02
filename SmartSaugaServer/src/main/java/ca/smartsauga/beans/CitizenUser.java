@@ -23,6 +23,13 @@ public class CitizenUser extends User {
 		
 	}
 	
+	public CitizenUser(String email) {
+		super(email);
+		this.joinDate = LocalDate.now();
+		this.lastLoggedDate = LocalDate.now();
+		
+	}
+	
 	
 
 }

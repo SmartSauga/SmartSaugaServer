@@ -1,5 +1,6 @@
 package ca.smartsauga.controllers;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,14 +15,31 @@ import ca.smartsauga.beans.Locations;
 @RestController
 public class LoginController {
 	
+	Dao dao = new Dao();
+	
+	@CrossOrigin
+	@RequestMapping(value = "/registerUser/{email}/{password}", method = RequestMethod.POST)
+	public CitizenUser registerUser(@PathVariable String email, @PathVariable String password) {
+		
+		if(!email.contentEquals(dao.getUnvalidatedUser(email))) {
+			CitizenUser newUser = new CitizenUser(email);
+			dao.registerUser(newUser, password);
+			return newUser;
+		} else {
+			return null;
+		}
+		
+	}
+	
 	
 	@CrossOrigin
 	@RequestMapping(value = "/validateUser/{email}/{password}", method = RequestMethod.POST)
-	public CitizenUser validateStudent(@PathVariable String email, @PathVariable String password) {
+	public CitizenUser validateUser(@PathVariable String email, @PathVariable String password) {
 		
 		//TODO: We want to check the password passed to the DAO that gets the password without instantiating a variable
 		//TODO: dao.validateUser will return a decrypted Password
 		//If Password is correct, return a CitizenUser else return null, handle at front end
+		//Return a profile
 		if(password.contentEquals(dao.validateUser(email))) {
 			return dao.getValidatedUser(email);
 		} else {
@@ -37,5 +55,6 @@ public class LoginController {
 		return dao.getAllLocations();
 		
 	}
+	
 
 }

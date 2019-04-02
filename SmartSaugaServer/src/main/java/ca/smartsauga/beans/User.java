@@ -22,7 +22,7 @@ public class User {
 	
 	@NotNull(message="Name cannot be null")
 	@Column(length = 80)
-	@Pattern(regexp=".*@.*\\..*", message="Email must be from Sheridan College")
+	@Pattern(regexp="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", message="Email must be valid")
 	private String email;
 	
 	private String imageFileName;
@@ -30,6 +30,9 @@ public class User {
 	public User(String email, String imageFileName) {
 		this.email = email;
 		this.imageFileName = imageFileName;
+	}
+	public User(String email) {
+		this.email = email;
 	}
 	
 
