@@ -21,7 +21,7 @@ public class User {
 	private int userId;
 	
 	@NotNull(message="Name cannot be null")
-	@Column(length = 80)
+	@Column(length = 80, unique=true)
 	@Pattern(regexp="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", message="Email must be valid")
 	private String email;
 	
