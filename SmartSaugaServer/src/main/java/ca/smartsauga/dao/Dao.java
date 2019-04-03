@@ -40,7 +40,7 @@ public class Dao {
 		return "password string";
 		
 	}
-	
+	//It returns user and we are using it to match passwords
 	public CitizenUser getValidatedUser(String email){
 		CitizenUser user = null;
 		Session session = sessionFactory.openSession();
@@ -68,7 +68,7 @@ public class Dao {
 		
 	}
 	
-	
+	//returns email for checking if user exists
 	public String getUnvalidatedUser(String email) {
 		CitizenUser citizenUser;
 		String userEmail = "";

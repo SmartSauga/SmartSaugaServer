@@ -16,17 +16,17 @@ public class CitizenUser extends User {
 	private LocalDate joinDate;
 	private LocalDate lastLoggedDate;
 	
-	public CitizenUser(String email, String imageFileName) {
-		super(email, imageFileName);
-		this.joinDate = LocalDate.now();
-		this.lastLoggedDate = LocalDate.now();
-		
-	}
+//	public CitizenUser(String email, String imageFileName) {
+//		super(email, imageFileName);
+//		this.joinDate = LocalDate.now();
+//		this.lastLoggedDate = LocalDate.now();
+//		
+//	}
 	
-	public CitizenUser(String email) {
-		super(email);
-		this.joinDate = LocalDate.now();
-		this.lastLoggedDate = LocalDate.now();
+	public CitizenUser(String email, String password) {
+		super(email,password);
+//		this.joinDate = LocalDate.now();
+//		this.lastLoggedDate = LocalDate.now();
 		
 	}
 	

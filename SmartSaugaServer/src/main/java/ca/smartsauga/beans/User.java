@@ -32,12 +32,13 @@ public class User {
 	@NotNull(message="Password cannot be null")
 	@Size(min=8)
 	private String password;
-	public User(String email, String imageFileName) {
+//	public User(String email, String imageFileName) {
+//		this.email = email;
+//		this.imageFileName = imageFileName;
+//	}
+	public User(String email, String password) {
 		this.email = email;
-		this.imageFileName = imageFileName;
-	}
-	public User(String email) {
-		this.email = email;
+		this.password = password;
 	}
 	
 

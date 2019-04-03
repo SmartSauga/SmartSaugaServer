@@ -25,7 +25,7 @@ public class LoginController {
 	public CitizenUser registerUser(@PathVariable String email, @PathVariable String password) {
 		
 		if(!email.contentEquals(dao.getUnvalidatedUser(email))) {
-			CitizenUser newUser = new CitizenUser(email);
+			CitizenUser newUser = new CitizenUser(email, password);
 			dao.registerUser(newUser, password);
 			return newUser;
 		} else {
@@ -43,7 +43,7 @@ public class LoginController {
 		//TODO: dao.validateUser will return a decrypted Password
 		//If Password is correct, return a CitizenUser else return null, handle at front end
 		//Return a profile
-		if(password.contentEquals(dao.validateUser(email))) {
+		if(password.contentEquals(dao.getValidatedUser(email).getPassword())) {
 			return dao.getValidatedUser(email);
 		} else {
 			return null;
