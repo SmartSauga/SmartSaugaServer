@@ -27,7 +27,8 @@ public class Dao {
 	public List<Locations> getAllLocations(){
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		Query query = session.createQuery("select location_name name from Locations");
+		//get location  object for this one ======pending
+		Query query = session.createQuery("from Locations");
 		List<Locations> locationList = (List<Locations>)query.getResultList();
 		session.getTransaction().commit();
 		session.close();
@@ -35,7 +36,6 @@ public class Dao {
 	}
 	
 	public String validateUser(String email) {
-		
 		
 		return "password string";
 		
@@ -57,5 +57,39 @@ public class Dao {
 		
 		
 	}
+	
+	public void registerUser(CitizenUser user, String password) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.save(user);
+		session.save(password);
+		session.getTransaction().commit();
+		session.close();
+		
+	}
+	
+	
+	public String getUnvalidatedUser(String email) {
+		CitizenUser citizenUser;
+		String userEmail = "";
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("from User WHERE email =: email");
+		query.setParameter("email", email);
+		List<CitizenUser> userList = query.getResultList();
+		session.getTransaction().commit();
+		session.close();
+		if(userList.size() == 1) {
+			userEmail = userList.get(0).getEmail();
+			return userEmail;
+		}else {
+			return userEmail;
+		}
+		
+		
+		
+	}
+	
+	
 	
 }

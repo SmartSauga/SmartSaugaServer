@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import lombok.*;
 
@@ -27,6 +28,9 @@ public class User {
 	
 	private String imageFileName;
 	
+	@NotNull(message="Password cannot be null")
+	@Size(min=8)
+	private String password;
 	public User(String email, String imageFileName) {
 		this.email = email;
 		this.imageFileName = imageFileName;
