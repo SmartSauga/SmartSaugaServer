@@ -1,4 +1,6 @@
 
+
+
 package ca.smartsauga.controllers;
 
 import java.time.LocalDate;
@@ -22,7 +24,7 @@ public class LoginController {
 	@CrossOrigin
 	@RequestMapping(value = "/registerUser/{email}/{password}", method = RequestMethod.POST)
 	public CitizenUser registerUser(@PathVariable String email, @PathVariable String password) {
-		//rn worki
+		
 		if(!email.contentEquals(dao.getUnvalidatedUser(email))) {
 			CitizenUser newUser = new CitizenUser(email);
 			dao.registerUser(newUser, password);

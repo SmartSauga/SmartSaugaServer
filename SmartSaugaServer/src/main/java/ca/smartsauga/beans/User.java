@@ -1,3 +1,4 @@
+
 package ca.smartsauga.beans;
 import java.time.LocalDate;
 
