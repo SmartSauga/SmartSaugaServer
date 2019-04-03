@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 import ca.smartsauga.beans.CitizenUser;
 import ca.smartsauga.beans.Locations;
 import ca.smartsauga.dao.Dao;
+import ca.smartsauga.utilities.PasswordController;
 
 @RestController
 public class LoginController {
 	
 	Dao dao = new Dao();
+	PasswordController passwordController = new PasswordController();
 	
 	@CrossOrigin
 	@RequestMapping(value = "/registerUser/{email}/{password}", method = RequestMethod.POST)
@@ -26,7 +28,7 @@ public class LoginController {
 		
 		if(!email.contentEquals(dao.getUnvalidatedUser(email))) {
 			CitizenUser newUser = new CitizenUser(email, password);
-			dao.registerUser(newUser, password);
+			dao.registerUser(newUser);
 			return newUser;
 		} else {
 			return null;
@@ -43,7 +45,7 @@ public class LoginController {
 		//TODO: dao.validateUser will return a decrypted Password
 		//If Password is correct, return a CitizenUser else return null, handle at front end
 		//Return a profile
-		if(password.contentEquals(dao.getValidatedUser(email).getPassword())) {
+		if(passwordController.encrypt(password).contentEquals(dao.getValidatedUser(email).getPassword())) {
 			return dao.getValidatedUser(email);
 		} else {
 			return null;

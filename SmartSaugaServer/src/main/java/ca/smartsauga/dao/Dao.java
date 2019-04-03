@@ -10,11 +10,13 @@ import org.hibernate.cfg.Configuration;
 
 import ca.smartsauga.beans.CitizenUser;
 import ca.smartsauga.beans.Locations;
+import ca.smartsauga.utilities.PasswordController;
 
 
 public class Dao {
 	SessionFactory sessionFactory = new Configuration().
 			configure("hibernate.cfg.xml").buildSessionFactory();
+	PasswordController passwordController = new PasswordController();
 	
 	public void addLocation(Locations locations) {
 		Session session = sessionFactory.openSession();
@@ -58,11 +60,11 @@ public class Dao {
 		
 	}
 	
-	public void registerUser(CitizenUser user, String password) {
+	public void registerUser(CitizenUser user) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
+		user.setPassword(passwordController.encrypt(user.getPassword()));
 		session.save(user);
-		session.save(password);
 		session.getTransaction().commit();
 		session.close();
 		

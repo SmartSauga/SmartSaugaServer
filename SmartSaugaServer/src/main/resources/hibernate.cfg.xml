@@ -27,8 +27,8 @@
 		<property name="dbcp.maxWaitMillis">-1</property>
 
 		<!-- Name the annotated Entity classes -->
-		<mapping class="ca.sheridancollege.beans.User" />
-		<mapping class="ca.sheridancollege.beans.CitizenUser" />
+		<mapping class="ca.smartsauga.beans.User" />
+		<mapping class="ca.smartsauga.beans.CitizenUser" />
 
 
 	</session-factory>
