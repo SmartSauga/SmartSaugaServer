@@ -51,6 +51,24 @@ public class LoginController {
 			return null;
 		}
 	}
+	//******************************
+	//This is for a prototype demonstration of the power of the REST server
+	//Will not be in final version
+	@CrossOrigin
+	@RequestMapping(value = "/validateUser/{email}/{password}", method = RequestMethod.GET)
+	public CitizenUser validateUserGET(@PathVariable String email, @PathVariable String password) {
+		
+		//TODO: We want to check the password passed to the DAO that gets the password without instantiating a variable
+		//TODO: dao.validateUser will return a decrypted Password
+		//If Password is correct, return a CitizenUser else return null, handle at front end
+		//Return a profile
+		if(passwordController.encrypt(password).contentEquals(dao.getValidatedUser(email).getPassword())) {
+			return dao.getValidatedUser(email);
+		} else {
+			return null;
+		}
+	}
+	//**********************************
 	
 	@CrossOrigin
 	@RequestMapping(value = "/GetLocations", method = RequestMethod.GET)
