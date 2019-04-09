@@ -36,7 +36,6 @@ public class LoginController {
 		
 	}
 	
-	
 	@CrossOrigin
 	@RequestMapping(value = "/validateUser/{email}/{password}", method = RequestMethod.POST)
 	public CitizenUser validateUser(@PathVariable String email, @PathVariable String password) {
@@ -55,7 +54,7 @@ public class LoginController {
 	//This is for a prototype demonstration of the power of the REST server
 	//Will not be in final version
 	@CrossOrigin
-	@RequestMapping(value = "/validateUser/{email}/{password}", method = RequestMethod.GET)
+	@RequestMapping(value = "/validateUserGET/{email}/{password}", method = RequestMethod.GET)
 	public CitizenUser validateUserGET(@PathVariable String email, @PathVariable String password) {
 		
 		//TODO: We want to check the password passed to the DAO that gets the password without instantiating a variable
