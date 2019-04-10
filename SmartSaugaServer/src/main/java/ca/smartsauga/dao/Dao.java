@@ -38,9 +38,7 @@ public class Dao {
 	}
 	
 	public String validateUser(String email) {
-		
 		return "password string";
-		
 	}
 	//It returns user and we are using it to match passwords
 	public CitizenUser getValidatedUser(String email){
@@ -87,11 +85,6 @@ public class Dao {
 		}else {
 			return userEmail;
 		}
-		
-		
-		
 	}
-	
-	
 	
 }

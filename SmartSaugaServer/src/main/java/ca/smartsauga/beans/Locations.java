@@ -16,8 +16,14 @@ public class Locations {
 	@Column(name="location_address", nullable=false, length=150)
 	private String address;
 	
-	@Column(name="location_address",nullable=true,length=150)
-	private String[] messageStrings;
+	@Column(nullable=false)
+	private double longitude;
+	
+	@Column(nullable=false)
+	private double latitude;
+	
+	//@Column(name="message_strings",nullable=true,length=150)
+	//private String[] messageStrings;
 	
 	private int ratings;
 	
@@ -27,7 +33,7 @@ public class Locations {
 	private String category;
 	
 	private int avgWifiRating;
-	
+	/*
 	public Locations(String name, String address, String[] messageStrings, int ratings, String image, String category, int avgWifiRating ) {
 		this.name = name;
 		this.address = address;
@@ -37,5 +43,14 @@ public class Locations {
 		this.category = category;
 		this.avgWifiRating = avgWifiRating;
 	}
+	*/
+
+	public Locations(String name, double longitude, double latitude) {
+		this.name = name;
+		this.longitude = longitude;
+		this.latitude = latitude;
+	}
+	
+	
 		
 }

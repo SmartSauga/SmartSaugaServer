@@ -3,6 +3,7 @@
 package ca.smartsauga.controllers;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ca.smartsauga.beans.CitizenUser;
 import ca.smartsauga.beans.Locations;
 import ca.smartsauga.dao.Dao;
+import ca.smartsauga.utilities.LocationList;
 import ca.smartsauga.utilities.PasswordController;
 
 @RestController
@@ -29,10 +31,25 @@ public class LoginController {
 		if(!email.contentEquals(dao.getUnvalidatedUser(email))) {
 			CitizenUser newUser = new CitizenUser(email, password);
 			dao.registerUser(newUser);
+			System.out.println(newUser.getEmail());
 			return newUser;
 		} else {
 			return null;
 		}
+		
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/genLocations", method = RequestMethod.GET)
+	public int genLocations() {
+		LocationList newLocations = new LocationList();
+		List<Locations> locations = new ArrayList<Locations>();
+		locations = newLocations.locations();
+		for(Locations l : locations) {
+			dao.addLocation(l);
+		}
+		
+		return 1;
 		
 	}
 	
@@ -45,6 +62,7 @@ public class LoginController {
 		//If Password is correct, return a CitizenUser else return null, handle at front end
 		//Return a profile
 		if(passwordController.encrypt(password).contentEquals(dao.getValidatedUser(email).getPassword())) {
+			System.out.println(dao.getValidatedUser(email).getEmail());
 			return dao.getValidatedUser(email);
 		} else {
 			return null;
