@@ -22,6 +22,7 @@
 	</pluginRepositories>
 	<groupId>ca.smartsauga</groupId>
 	<artifactId>SmartSaugaServer</artifactId>
+        <packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>SmartSaugaServer</name>
 	<description>Form Binding Example</description>
@@ -40,6 +41,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+			<dependency>
+ 			  <groupId>org.springframework.boot</groupId>
+			   <artifactId>spring-boot-starter-tomcat</artifactId>
+ 			  <scope>provided</scope>
 		</dependency>
 		<dependency>
 	  		<groupId>org.hibernate</groupId>
@@ -63,6 +69,11 @@
 	  		<artifactId>jaxb-core</artifactId>
 	  		<version>2.3.0.1</version>
 	  	</dependency>
+		<dependency>
+    		<groupId>org.apache.maven.plugins</groupId>
+    		<artifactId>maven-clean-plugin</artifactId>
+   		 <version>3.1.0</version>
+		</dependency>
 	  	<dependency>
 	  		<groupId>javax.activation</groupId>
 	  		<artifactId>activation</artifactId>
@@ -72,16 +83,18 @@
 	  		<groupId>org.projectlombok</groupId>
 	  		<artifactId>lombok</artifactId>
 	  		</dependency>
-	  	<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>tomcat-jasper</artifactId>
-			<version>9.0.16</version>
-		</dependency>
+	  	
 	  	<dependency>
 	  		<groupId>jstl</groupId>
 	  		<artifactId>jstl</artifactId>
 	  		<version>1.2</version>
 	  	</dependency>
+		<dependency>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-surefire-plugin</artifactId>
+ 			 <version>3.0.0-M3</version>
+ 			 <type>maven-plugin</type>
+		</dependency>
 	</dependencies>
 	
 	<build>
@@ -89,11 +102,18 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<executable>true</executable>
-				</configuration>
 			</plugin>
+			<plugin>
+   				 <groupId>org.apache.maven.plugins</groupId>
+   				 <artifactId>maven-surefire-plugin</artifactId>
+   				 <version>2.22.1</version>
+   				 <configuration>
+       					 <testFailureIgnore>true</testFailureIgnore>
+  				  </configuration>
+			</plugin>	
 		</plugins>
+		<finalName>${artifactId}</finalName>
 	</build>
 
 </project>
+ 
