@@ -92,20 +92,20 @@ public class Dao {
 		session.beginTransaction();
 		
 		CitizenUser modUser = (CitizenUser) session.get(CitizenUser.class, cu.getEmail());
-		if(!modUser.getName().isEmpty()) {
-			modUser.setName(cu.getName());
+		if(!cu.getName().isEmpty()) {
+			modUser.setName(cu.getName().trim());
 		}
-		if(!modUser.getBirthdate().isEmpty()) {
-			modUser.setBirthdate(cu.getBirthdate());
+		if(!cu.getBirthdate().isEmpty()) {
+			modUser.setBirthdate(cu.getBirthdate().trim());
 		}
-		if(!modUser.getAbout().isEmpty()) {
-			modUser.setAbout(cu.getAbout());
+		if(!cu.getAbout().isEmpty()) {
+			modUser.setAbout(cu.getAbout().trim());
 		}
-		if(!modUser.getFacebookUrl().isEmpty()) {
-			modUser.setFacebookUrl(cu.getFacebookUrl());
+		if(!cu.getFacebookUrl().isEmpty()) {
+			modUser.setFacebookUrl(cu.getFacebookUrl().trim());
 		}
-		if(!modUser.getNotes().isEmpty()) {
-			modUser.setNotes(cu.getNotes());
+		if(!cu.getNotes().isEmpty()) {
+			modUser.setNotes(cu.getNotes().trim());
 		}
 		session.getTransaction().commit();
 		session.close();
