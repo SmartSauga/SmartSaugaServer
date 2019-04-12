@@ -91,21 +91,22 @@ public class Dao {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		
-		CitizenUser modUser = (CitizenUser) session.get(CitizenUser.class, id);
+
+		CitizenUser modUser = (CitizenUser) session.get(CitizenUser.class, cu.getUserId());
 		if(!cu.getName().isEmpty()) {
-			modUser.setName(cu.getName());
+			modUser.setName(cu.getName().trim());
 		}
 		if(!cu.getBirthdate().isEmpty()) {
-			modUser.setBirthdate(cu.getBirthdate());
+			modUser.setBirthdate(cu.getBirthdate().trim());
 		}
 		if(!cu.getAbout().isEmpty()) {
-			modUser.setAbout(cu.getAbout());
+			modUser.setAbout(cu.getAbout().trim());
 		}
 		if(!cu.getFacebookUrl().isEmpty()) {
-			modUser.setFacebookUrl(cu.getFacebookUrl());
+			modUser.setFacebookUrl(cu.getFacebookUrl().trim());
 		}
 		if(!cu.getNotes().isEmpty()) {
-			modUser.setNotes(cu.getNotes());
+			modUser.setNotes(cu.getNotes().trim());
 		}
 		session.getTransaction().commit();
 		session.close();
