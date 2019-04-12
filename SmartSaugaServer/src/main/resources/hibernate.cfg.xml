@@ -29,6 +29,7 @@
 		<!-- Name the annotated Entity classes -->
 		<mapping class="ca.smartsauga.beans.User" />
 		<mapping class="ca.smartsauga.beans.CitizenUser" />
+		<mapping class="ca.smartsauga.beans.Locations" />
 
 
 	</session-factory>

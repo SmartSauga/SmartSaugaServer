@@ -46,7 +46,7 @@ public class Dao {
 		CitizenUser user = null;
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		Query query = session.createQuery("from User WHERE email =: email");
+		Query query = session.createQuery("from User WHERE email =:email");
 		query.setParameter("email", email);
 		List<CitizenUser> userList = (List<CitizenUser>) query.getResultList();
 		if(userList.size() == 1) {
@@ -91,20 +91,20 @@ public class Dao {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		
-		CitizenUser modUser = (CitizenUser) session.get(CitizenUser.class, cu.getEmail());
-		if(!modUser.getName().isEmpty()) {
+		CitizenUser modUser = (CitizenUser) session.get(CitizenUser.class, id);
+		if(!cu.getName().isEmpty()) {
 			modUser.setName(cu.getName());
 		}
-		if(!modUser.getBirthdate().isEmpty()) {
+		if(!cu.getBirthdate().isEmpty()) {
 			modUser.setBirthdate(cu.getBirthdate());
 		}
-		if(!modUser.getAbout().isEmpty()) {
+		if(!cu.getAbout().isEmpty()) {
 			modUser.setAbout(cu.getAbout());
 		}
-		if(!modUser.getFacebookUrl().isEmpty()) {
+		if(!cu.getFacebookUrl().isEmpty()) {
 			modUser.setFacebookUrl(cu.getFacebookUrl());
 		}
-		if(!modUser.getNotes().isEmpty()) {
+		if(!cu.getNotes().isEmpty()) {
 			modUser.setNotes(cu.getNotes());
 		}
 		session.getTransaction().commit();

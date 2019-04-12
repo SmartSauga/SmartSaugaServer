@@ -11,7 +11,7 @@ public class LocationList {
 	
 	public List<Locations> locations() {
 		
-		locationList.add(new Locations("Lorne Park Library",610893.308,4820703.495));
+		locationList.add(new Locations("Lorne Park Library",43.53, 79.62));
 		locationList.add(new Locations("Benares Estate Visitor Centre",610201.019,4820363.828));
 		locationList.add(new Locations("Bradley Museum-Heritage",612235.291,4818614.671));
 		locationList.add(new Locations("Braeben Golf Course Academy",605813.283,4828050.344));
