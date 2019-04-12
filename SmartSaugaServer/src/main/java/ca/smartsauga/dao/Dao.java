@@ -113,5 +113,19 @@ public class Dao {
 		
 		return modUser;
 	}
+	public boolean deleteCitizenUser(CitizenUser cu) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		
+
+		CitizenUser modUser = (CitizenUser) session.get(CitizenUser.class, cu.getUserId());
+		
+		session.delete(modUser);
+		
+		session.getTransaction().commit();
+		session.close();
+		
+		return true;
+	}
 	
 }

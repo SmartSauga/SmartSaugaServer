@@ -107,8 +107,18 @@ public class LoginController {
 	@RequestMapping(value = "/GetLocations", method = RequestMethod.GET)
 	public List<Locations> getLocations() {
 		
-		//TODO: DAO Get All Locations needs to be in DAO class
 		return dao.getAllLocations();
+		
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/DeleteUser/{email}", method = RequestMethod.DELETE)
+	public int deleteUser(@PathVariable String email) {
+		
+		CitizenUser delUser = dao.getValidatedUser(email);
+		
+		dao.deleteCitizenUser(delUser);
+		return 0;
 		
 	}
 	
