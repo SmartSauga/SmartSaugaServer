@@ -32,6 +32,12 @@ public class User {
 	@NotNull(message="Password cannot be null")
 	@Size(min=8)
 	private String password;
+	
+	private String name;
+	private String birthdate;
+	private String about;
+	private String facebookUrl;
+	private String notes;
 //	public User(String email, String imageFileName) {
 //		this.email = email;
 //		this.imageFileName = imageFileName;

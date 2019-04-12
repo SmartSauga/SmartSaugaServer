@@ -10,6 +10,7 @@ import org.hibernate.cfg.Configuration;
 
 import ca.smartsauga.beans.CitizenUser;
 import ca.smartsauga.beans.Locations;
+import ca.smartsauga.beans.User;
 import ca.smartsauga.utilities.PasswordController;
 
 
@@ -85,6 +86,31 @@ public class Dao {
 		}else {
 			return userEmail;
 		}
+	}
+	public CitizenUser modifyProfile(CitizenUser cu) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		
+		CitizenUser modUser = (CitizenUser) session.get(CitizenUser.class, cu.getEmail());
+		if(!modUser.getName().isEmpty()) {
+			modUser.setName(cu.getName());
+		}
+		if(!modUser.getBirthdate().isEmpty()) {
+			modUser.setBirthdate(cu.getBirthdate());
+		}
+		if(!modUser.getAbout().isEmpty()) {
+			modUser.setAbout(cu.getAbout());
+		}
+		if(!modUser.getFacebookUrl().isEmpty()) {
+			modUser.setFacebookUrl(cu.getFacebookUrl());
+		}
+		if(!modUser.getNotes().isEmpty()) {
+			modUser.setNotes(cu.getNotes());
+		}
+		session.getTransaction().commit();
+		session.close();
+		
+		return modUser;
 	}
 	
 }

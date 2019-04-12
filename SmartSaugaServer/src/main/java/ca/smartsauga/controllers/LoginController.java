@@ -1,5 +1,3 @@
-
-
 package ca.smartsauga.controllers;
 
 import java.time.LocalDate;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ca.smartsauga.beans.CitizenUser;
 import ca.smartsauga.beans.Locations;
+import ca.smartsauga.beans.User;
 import ca.smartsauga.dao.Dao;
 import ca.smartsauga.utilities.LocationList;
 import ca.smartsauga.utilities.PasswordController;
@@ -36,6 +35,23 @@ public class LoginController {
 		} else {
 			return null;
 		}
+		
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/updateProfile/{email}/{name}/{birthdate}/{about}/{facebookurl}/{notes}", method = RequestMethod.POST)
+	public CitizenUser updateProfile(@PathVariable String email, @PathVariable String name, @PathVariable String birthdate,
+			@PathVariable String about, @PathVariable String facebookurl, @PathVariable String notes) {
+		
+		CitizenUser user = dao.getValidatedUser(email);
+		
+		user.setName(name);
+		user.setBirthdate(birthdate);
+		user.setAbout(about);
+		user.setFacebookUrl(facebookurl);
+		user.setNotes(notes);
+		
+		return dao.modifyProfile(user);
 		
 	}
 	
