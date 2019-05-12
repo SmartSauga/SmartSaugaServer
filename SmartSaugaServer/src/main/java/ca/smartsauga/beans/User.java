@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import ca.smartsauga.enums.UserStatus;
 import lombok.*;
 
 @AllArgsConstructor
@@ -33,18 +34,22 @@ public class User {
 	@Size(min=8)
 	private String password;
 	
+	@NotNull(message="User must have a status")
+	UserStatus status;
+	
+	//Prototype Data - To Be Deleted ************************
 	private String name;
 	private String birthdate;
 	private String about;
 	private String facebookUrl;
 	private String notes;
-//	public User(String email, String imageFileName) {
-//		this.email = email;
-//		this.imageFileName = imageFileName;
-//	}
+	//********************************************************
+	
+	
 	public User(String email, String password) {
 		this.email = email;
 		this.password = password;
+		this.status = UserStatus.UNVERIFIED;
 	}
 	
 

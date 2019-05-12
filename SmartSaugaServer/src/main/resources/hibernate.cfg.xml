@@ -7,6 +7,7 @@
 		<property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
 		<property name="connection.url">jdbc:mysql://localhost:3306/SmartSauga?serverTimezone=America/Toronto</property>
 		<property name="connection.username">root</property>
+		<!--  <property name="connection.password">root</property> -->
 		<property name="connection.password">$martsaugasheridan</property>
 
 		<!-- Set the database dialect -->
@@ -30,6 +31,8 @@
 		<mapping class="ca.smartsauga.beans.User" />
 		<mapping class="ca.smartsauga.beans.CitizenUser" />
 		<mapping class="ca.smartsauga.beans.Locations" />
+		<mapping class="ca.smartsauga.beans.CityLocations" />
+		<mapping class="ca.smartsauga.beans.CorporateLocation" />
 
 
 	</session-factory>

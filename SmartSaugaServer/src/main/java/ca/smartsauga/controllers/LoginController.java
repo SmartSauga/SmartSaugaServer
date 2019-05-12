@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ca.smartsauga.beans.CitizenUser;
+import ca.smartsauga.beans.CorporateLocation;
 import ca.smartsauga.beans.Locations;
 import ca.smartsauga.beans.User;
 import ca.smartsauga.dao.Dao;
+import ca.smartsauga.dao.LocationDao;
+import ca.smartsauga.enums.LocationType;
 import ca.smartsauga.utilities.LocationList;
 import ca.smartsauga.utilities.PasswordController;
 
@@ -21,6 +24,7 @@ import ca.smartsauga.utilities.PasswordController;
 public class LoginController {
 	
 	Dao dao = new Dao();
+	LocationDao locDao = new LocationDao();
 	PasswordController passwordController = new PasswordController();
 	
 	@CrossOrigin
@@ -28,7 +32,10 @@ public class LoginController {
 	public CitizenUser registerUser(@PathVariable String email, @PathVariable String password) {
 		
 		if(!email.contentEquals(dao.getUnvalidatedUser(email))) {
-			CitizenUser newUser = new CitizenUser(email, password);
+			CitizenUser newUser = new CitizenUser();
+			newUser.setEmail(email);
+			newUser.setPassword(password);
+			System.out.println("**************** " + newUser.getEmail() + " ***********************************");
 			dao.registerUser(newUser);
 			System.out.println(newUser.getEmail());
 			return newUser;
@@ -120,6 +127,27 @@ public class LoginController {
 		dao.deleteCitizenUser(delUser);
 		return 0;
 		
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/ProposeLocation/{name}/{address}/{password}/{photo}/{wifiRating}/{locRating}/{category}/{comment}/{longitude}/{latitude}", 
+	method = RequestMethod.POST)
+	public int proposeLocation(@PathVariable String name, @PathVariable String password, @PathVariable String photo, @PathVariable String wifiRating,
+			@PathVariable String locRating, @PathVariable String category, @PathVariable String comment, 
+			@PathVariable String longitude, @PathVariable String latitude, @PathVariable String address) {
+		
+		double numLongitude = Double.parseDouble(longitude);
+		double numLatitude = Double.parseDouble(latitude);
+		int numLocRating = Integer.parseInt(locRating);
+		int numWifiRating = Integer.parseInt(wifiRating);
+		LocationType locType = LocationType.toType(category);
+		
+		
+		Locations proposedLocation = new CorporateLocation(name, address, numLongitude, numLatitude, numLocRating, 
+				numWifiRating, locType, photo, password);
+		
+		locDao.addCorporateLocation(proposedLocation);
+		return 0;
 	}
 	
 

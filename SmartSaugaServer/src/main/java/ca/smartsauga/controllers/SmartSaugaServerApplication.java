@@ -12,3 +12,14 @@ public class SmartSaugaServerApplication extends SpringBootServletInitializer{
 	}
 
 }
+
+/*
+@SpringBootApplication
+public class SmartSaugaServerApplication{
+
+	public static void main(String[] args) {
+		SpringApplication.run(SmartSaugaServerApplication.class, args);
+	}
+
+}
+*/

@@ -16,20 +16,18 @@ public class CitizenUser extends User {
 	private LocalDate joinDate;
 	private LocalDate lastLoggedDate;
 	
-//	public CitizenUser(String email, String imageFileName) {
-//		super(email, imageFileName);
-//		this.joinDate = LocalDate.now();
-//		this.lastLoggedDate = LocalDate.now();
-//		
-//	}
+	private String name;
+	private String streetAddress;
+	private String cityName;
+	private String province;
+	private LocalDate userBirthdate;
+	private String email;
 	
 	public CitizenUser(String email, String password) {
-		super(email,password);
-//		this.joinDate = LocalDate.now();
-//		this.lastLoggedDate = LocalDate.now();
-		
+		super(email, password);
+		// TODO Auto-generated constructor stub
 	}
 	
 	
-
+	
 }
