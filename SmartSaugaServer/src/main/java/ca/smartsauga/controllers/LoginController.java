@@ -16,6 +16,7 @@ import ca.smartsauga.beans.Locations;
 import ca.smartsauga.beans.User;
 import ca.smartsauga.dao.Dao;
 import ca.smartsauga.dao.LocationDao;
+import ca.smartsauga.enums.LocationStatus;
 import ca.smartsauga.enums.LocationType;
 import ca.smartsauga.utilities.LocationList;
 import ca.smartsauga.utilities.PasswordController;
@@ -135,20 +136,83 @@ public class LoginController {
 	public int proposeLocation(@PathVariable String name, @PathVariable String password, @PathVariable String photo, @PathVariable String wifiRating,
 			@PathVariable String locRating, @PathVariable String category, @PathVariable String comment, 
 			@PathVariable String longitude, @PathVariable String latitude, @PathVariable String address) {
-		
-		double numLongitude = Double.parseDouble(longitude);
-		double numLatitude = Double.parseDouble(latitude);
-		int numLocRating = Integer.parseInt(locRating);
-		int numWifiRating = Integer.parseInt(wifiRating);
-		LocationType locType = LocationType.toType(category);
-		
-		
-		Locations proposedLocation = new CorporateLocation(name, address, numLongitude, numLatitude, numLocRating, 
-				numWifiRating, locType, photo, password);
-		
-		locDao.addCorporateLocation(proposedLocation);
-		return 0;
+		try {
+			double numLongitude = Double.parseDouble(longitude);
+			double numLatitude = Double.parseDouble(latitude);
+			int numLocRating = Integer.parseInt(locRating);
+			int numWifiRating = Integer.parseInt(wifiRating);
+			LocationType locType = LocationType.toType(category);
+			
+			
+			Locations proposedLocation = new CorporateLocation(name, address, numLongitude, numLatitude, numLocRating, 
+					numWifiRating, locType, photo, password);
+			if(locDao.addCorporateLocation(proposedLocation) == 1) {
+				return 1;
+			} else {
+				return 0;
+			}
+		}catch(NumberFormatException e) {
+			return 1;
+		}
+	
 	}
 	
+	@CrossOrigin
+	@RequestMapping(value = "/ADMINCreateLocation/{name}/{address}/{password}/{photo}/{wifiRating}/{locRating}/{category}/{comment}/{longitude}/{latitude}", 
+	method = RequestMethod.POST)
+	public int adminCreateLocation(@PathVariable String name, @PathVariable String password, @PathVariable String photo, @PathVariable String wifiRating,
+			@PathVariable String locRating, @PathVariable String category, @PathVariable String comment, 
+			@PathVariable String longitude, @PathVariable String latitude, @PathVariable String address) {
+		try {
+			double numLongitude = Double.parseDouble(longitude);
+			double numLatitude = Double.parseDouble(latitude);
+			int numLocRating = Integer.parseInt(locRating);
+			int numWifiRating = Integer.parseInt(wifiRating);
+			LocationType locType = LocationType.toType(category);
+			
+			CorporateLocation  createdLoc = new CorporateLocation(name, address, numLongitude, numLatitude, numLocRating, 
+					numWifiRating, locType, photo, password);
+			createdLoc.setLocStatus(LocationStatus.CITYAPPROVED);
+			
+			if(locDao.addCorporateLocation(createdLoc) == 1) {
+				return 1;
+			} else {
+				return 0;
+			}
+		}catch(NumberFormatException e) {
+			return 1;
+		}
+	
+	}
+	/*
+	@CrossOrigin
+	@RequestMapping(value = "/ChangeLocInfo/{locid}/{name}/{address}/{password}/{photo}/{wifiRating}/{locRating}/{category}/{comment}/{longitude}/{latitude}/{status}", 
+	method = RequestMethod.POST)
+	public int changeLocationInformation(@PathVariable int locid, @PathVariable String name, @PathVariable String password, @PathVariable String photo, @PathVariable String wifiRating,
+			@PathVariable String locRating, @PathVariable String category, @PathVariable String comment, 
+			@PathVariable String longitude, @PathVariable String latitude, @PathVariable String address, @PathVariable String status) {
+		try {
+			double numLongitude = Double.parseDouble(longitude);
+			double numLatitude = Double.parseDouble(latitude);
+			int numLocRating = Integer.parseInt(locRating);
+			int numWifiRating = Integer.parseInt(wifiRating);
+			LocationType locType = LocationType.toType(category);
+			LocationStatus locStatus = LocationStatus.toStatus(status);
+			
+			
+			Locations changeLocInfo = new CorporateLocation(name, address, numLongitude, numLatitude, numLocRating, 
+					numWifiRating, locType, photo, password);
+			changeLocInfo.setLocationId(locid);
+			if(locDao.addCorporateLocation(changeLocInfo) == 1) {
+				return 1;
+			} else {
+				return 0;
+			}
+		}catch(NumberFormatException e) {
+			return 1;
+		}
+	
+	}
+	*/
 
 }
