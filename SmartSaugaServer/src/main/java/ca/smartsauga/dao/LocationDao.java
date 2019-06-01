@@ -11,6 +11,7 @@ import org.hibernate.cfg.Configuration;
 import ca.smartsauga.beans.CitizenUser;
 import ca.smartsauga.beans.CorporateLocation;
 import ca.smartsauga.beans.Locations;
+import ca.smartsauga.enums.LocationStatus;
 
 public class LocationDao {
 	SessionFactory sessionFactory = new Configuration().
@@ -51,6 +52,27 @@ public class LocationDao {
 			session.close();
 			return 0;
 		}
+	}
+	
+	//Need Validation for SQL errors, such as nothing found
+	public int curateLocation(String id, LocationStatus status) {
+		CorporateLocation loc = null;
+		int locId = Integer.parseInt(id);
+		
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("from Locations WHERE id =:id");
+		query.setParameter("id", locId);
+		List<CorporateLocation> locList = (List<CorporateLocation>) query.getResultList();
+		if(locList.size() == 1) {
+			loc = locList.get(0);
+			loc.setLocStatus(status);
+		} else {
+			return 1;
+		}
+		session.getTransaction().commit();
+		session.close();
+		return 0;
 	}
 	
 	

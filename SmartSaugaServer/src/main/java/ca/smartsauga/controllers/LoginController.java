@@ -184,6 +184,18 @@ public class LoginController {
 		}
 	
 	}
+	
+	//Curate Location - Need Validation to ensure admin is sending this mapping
+	@CrossOrigin
+	@RequestMapping(value = "/ADMINCurateLocation/{id}/{status}", 
+	method = RequestMethod.POST)
+	public int adminCurateLocation(@PathVariable String id, @PathVariable String status) {
+		
+		LocationStatus thisStatus = LocationStatus.toStatus(status);
+		locDao.curateLocation(id, thisStatus);
+		return 0;
+	
+	}
 	/*
 	@CrossOrigin
 	@RequestMapping(value = "/ChangeLocInfo/{locid}/{name}/{address}/{password}/{photo}/{wifiRating}/{locRating}/{category}/{comment}/{longitude}/{latitude}/{status}", 
