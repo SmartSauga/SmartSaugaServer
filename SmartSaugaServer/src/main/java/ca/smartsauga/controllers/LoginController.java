@@ -196,6 +196,17 @@ public class LoginController {
 		return 0;
 	
 	}
+	
+	//Remove Location - Need Validation to ensure Admin is sending this mapping
+		@CrossOrigin
+		@RequestMapping(value = "/ADMINCurateLocation/{id}/{status}", 
+		method = RequestMethod.POST)
+		public int adminRemoveLocation(@PathVariable String id) {
+			
+			locDao.curateLocation(id, thisStatus);
+			return 0;
+		
+		}
 	/*
 	@CrossOrigin
 	@RequestMapping(value = "/ChangeLocInfo/{locid}/{name}/{address}/{password}/{photo}/{wifiRating}/{locRating}/{category}/{comment}/{longitude}/{latitude}/{status}", 

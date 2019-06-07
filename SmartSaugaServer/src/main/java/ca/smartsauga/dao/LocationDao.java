@@ -54,6 +54,18 @@ public class LocationDao {
 		}
 	}
 	
+	public int removeLocation(int id) {
+		
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Locations delLocation = (Locations) session.get(Locations.class, id);
+		session.delete(delLocation);
+		session.getTransaction().commit();
+		session.close();
+		return 0;
+
+	}
+	
 	//Need Validation for SQL errors, such as nothing found
 	public int curateLocation(String id, LocationStatus status) {
 		CorporateLocation loc = null;
