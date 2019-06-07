@@ -203,7 +203,7 @@ public class LoginController {
 		method = RequestMethod.POST)
 		public int adminRemoveLocation(@PathVariable String id) {
 			
-			locDao.curateLocation(id, thisStatus);
+			locDao.removeLocation(Integer.parseInt(id));
 			return 0;
 		
 		}
