@@ -199,11 +199,22 @@ public class LoginController {
 	
 	//Remove Location - Need Validation to ensure Admin is sending this mapping
 		@CrossOrigin
-		@RequestMapping(value = "/ADMINCurateLocation/{id}/{status}", 
+		@RequestMapping(value = "/ADMINRemoveLocation/{id}/{status}", 
 		method = RequestMethod.POST)
 		public int adminRemoveLocation(@PathVariable String id) {
 			
 			locDao.removeLocation(Integer.parseInt(id));
+			return 0;
+		
+		}
+	//Rate a Location
+		@CrossOrigin
+		@RequestMapping(value = "/RateLocation/{id}/{rating}", 
+		method = RequestMethod.POST)
+		public int rateLocation(@PathVariable String id, @PathVariable String rating) {
+			
+			
+			locDao.rateLocation(Integer.parseInt(id), Integer.parseInt(rating));
 			return 0;
 		
 		}

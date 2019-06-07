@@ -87,6 +87,20 @@ public class LocationDao {
 		return 0;
 	}
 	
+	public int rateLocation(int id, int rating) {
+		CorporateLocation loc = null;
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Locations rateLoc = (Locations) session.get(Locations.class, id);
+		/* TODO: Fix Ratings on Locations to be a list
+		 * Change setLocUserRating to send to a method that takes the list of ratings and calculates the average
+		 * This is actually wrong, the object needs a LIST of ratings to get an average, but for now, this just sets it
+		*/
+		rateLoc.setLocUserRating(rating);
+		session.getTransaction().commit();
+		session.close();
+		return 0;
+	}
 	
 
 }
