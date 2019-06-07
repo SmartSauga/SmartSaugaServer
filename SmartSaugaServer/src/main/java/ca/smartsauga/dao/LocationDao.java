@@ -88,7 +88,6 @@ public class LocationDao {
 	}
 	
 	public int rateLocation(int id, int rating) {
-		CorporateLocation loc = null;
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Locations rateLoc = (Locations) session.get(Locations.class, id);
