@@ -218,7 +218,7 @@ public class LoginController {
 			return 0;
 		
 		}
-	/*
+	
 	@CrossOrigin
 	@RequestMapping(value = "/ChangeLocInfo/{locid}/{name}/{address}/{password}/{photo}/{wifiRating}/{locRating}/{category}/{comment}/{longitude}/{latitude}/{status}", 
 	method = RequestMethod.POST)
@@ -234,10 +234,10 @@ public class LoginController {
 			LocationStatus locStatus = LocationStatus.toStatus(status);
 			
 			
-			Locations changeLocInfo = new CorporateLocation(name, address, numLongitude, numLatitude, numLocRating, 
+			CorporateLocation changeLocInfo = new CorporateLocation(name, address, numLongitude, numLatitude, numLocRating, 
 					numWifiRating, locType, photo, password);
 			changeLocInfo.setLocationId(locid);
-			if(locDao.addCorporateLocation(changeLocInfo) == 1) {
+			if(locDao.changeLocInfo(changeLocInfo) == 1) {
 				return 1;
 			} else {
 				return 0;
@@ -247,6 +247,4 @@ public class LoginController {
 		}
 	
 	}
-	*/
-
 }

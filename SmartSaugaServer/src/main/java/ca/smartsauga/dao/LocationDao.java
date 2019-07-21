@@ -103,5 +103,25 @@ public class LocationDao {
 		return 0;
 	}
 	
+	public int changeLocInfo(CorporateLocation corpLocation) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		
+		CorporateLocation modLoc = (CorporateLocation) session.get(CorporateLocation.class, corpLocation.getLocationId());
+		modLoc.setAddress(corpLocation.getAddress());
+		modLoc.setLatitude(corpLocation.getLatitude());
+		modLoc.setLongitude(corpLocation.getLongitude());
+		modLoc.setLocationImageFile(corpLocation.getLocationImageFile());
+		modLoc.setLocStatus(corpLocation.getLocStatus());
+		modLoc.setName(corpLocation.getName());
+		modLoc.setType(corpLocation.getType());
+		
+		session.getTransaction().commit();
+		session.close();
+		
+		
+		return 0;
+	}
+	
 
 }
