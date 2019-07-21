@@ -21,6 +21,8 @@ public class Locations {
 	
 	private int locUserRating;
 	
+	private int locNumRaters;
+	
 	private int wifiRating;
 	
 	private LocationType type;
@@ -56,6 +58,7 @@ public class Locations {
 		this.wifiRating  = wifiRating;
 		this.type = locType;
 		this.locationImageFile = fileImage;
+		this.locNumRaters = 0;
 	}
 
 	public Locations(String name, double longitude, double latitude) {

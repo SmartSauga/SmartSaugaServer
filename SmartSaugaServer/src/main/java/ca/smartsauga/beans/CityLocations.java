@@ -20,9 +20,9 @@ public class CityLocations extends Locations {
 	private ArrayList<Integer> uniqueUsers; 
 	private int userCount;
 	
-	public CityLocations(int locationId, String name, String address, int locUserRating, int wifiRating,
+	public CityLocations(int locationId, String name, String address, int locUserRating, int locNumRaters, int wifiRating,
 			LocationType type, String locationImageFile, double longitude, double latitude) {
-		super(locationId, name, address, locUserRating, wifiRating, type, locationImageFile, longitude, latitude);
+		super(locationId, name, address, locUserRating, locNumRaters, wifiRating, type, locationImageFile, longitude, latitude);
 		this.status = true;
 		this.uniqueUsers = new ArrayList<Integer>();
 		this.userCount = 0;

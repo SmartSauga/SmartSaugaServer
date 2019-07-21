@@ -95,7 +95,9 @@ public class LocationDao {
 		 * Change setLocUserRating to send to a method that takes the list of ratings and calculates the average
 		 * This is actually wrong, the object needs a LIST of ratings to get an average, but for now, this just sets it
 		*/
-		rateLoc.setLocUserRating(rating);
+		int newRating = (rateLoc.getLocUserRating()+(rating/rateLoc.getLocNumRaters())) * (1-(1/rateLoc.getLocNumRaters()));
+		rateLoc.setLocNumRaters(rateLoc.getLocNumRaters() + 1);
+		rateLoc.setLocUserRating(newRating);
 		session.getTransaction().commit();
 		session.close();
 		return 0;
