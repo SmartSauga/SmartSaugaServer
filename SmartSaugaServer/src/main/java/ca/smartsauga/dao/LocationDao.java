@@ -17,7 +17,7 @@ public class LocationDao {
 	SessionFactory sessionFactory = new Configuration().
 			configure("hibernate.cfg.xml").buildSessionFactory();
 	
-	public boolean getLocation(String address){
+	public int getLocation(String address){
 		Locations loc = null;
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
@@ -30,26 +30,26 @@ public class LocationDao {
 			loc = locList.get(0);
 			session.getTransaction().commit();
 			session.close();
-			return true;
+			return 1;
 		}else {
-			return false;
+			return 0;
 		}
 		}catch(NullPointerException e) {
-			return false;
+			return 6;
 		}
 		
 	}
 	
-	public boolean addCorporateLocation(Locations location) {
-		if(getLocation(location.getAddress()) == true) {
-			return false;
+	public int addCorporateLocation(Locations location) {
+		if(getLocation(location.getAddress()) == 1) {
+			return 0;
 		} else {
 			Session session = sessionFactory.openSession();
 			session.beginTransaction();
 			session.save(location);
 			session.getTransaction().commit();
 			session.close();
-			return true;
+			return 1;
 		}
 	}
 	

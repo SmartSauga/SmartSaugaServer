@@ -129,7 +129,7 @@ public class LoginController {
 		return 0;
 		
 	}
-	//1 unsuccessful and 0 successful
+	//1 successful and 0 unsuccessful
 	@CrossOrigin
 	@RequestMapping(value = "/ProposeLocation/{name}/{address}/{password}/{photo}/{wifiRating}/{locRating}/{category}/{comment}/{longitude}/{latitude}", 
 	method = RequestMethod.POST)
@@ -146,8 +146,8 @@ public class LoginController {
 			
 			Locations proposedLocation = new CorporateLocation(name, address, numLongitude, numLatitude, numLocRating, 
 					numWifiRating, locType, photo, password);
-			Boolean locAdded = locDao.addCorporateLocation(proposedLocation);
-			if(locAdded == true) {
+			int locAdded = locDao.addCorporateLocation(proposedLocation);
+			if(locAdded == 1) {
 				return 1;
 			} else {
 				return 0;
@@ -175,7 +175,7 @@ public class LoginController {
 					numWifiRating, locType, photo, password);
 			createdLoc.setLocStatus(LocationStatus.CITYAPPROVED);
 			
-			if(locDao.addCorporateLocation(createdLoc) == true) {
+			if(locDao.addCorporateLocation(createdLoc) == 1) {
 				return 1;
 			} else {
 				return 0;
