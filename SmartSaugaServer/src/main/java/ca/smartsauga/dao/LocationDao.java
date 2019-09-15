@@ -17,40 +17,39 @@ public class LocationDao {
 	SessionFactory sessionFactory = new Configuration().
 			configure("hibernate.cfg.xml").buildSessionFactory();
 	
-	public int getLocation(Locations location){
+	public boolean getLocation(String address){
 		Locations loc = null;
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		Query query = session.createQuery("from Locations WHERE location_address =:address");
-		query.setParameter("address", location.getAddress());
+		Query query = session.createQuery("from Locations WHERE address =:address");
+		query.setParameter("address", address);
 		List<Locations> locList = (List<Locations>) query.getResultList();
-		if(locList.size() == 1) {
+		try{
+			if(locList.size() == 1) {
+		
 			loc = locList.get(0);
+			session.getTransaction().commit();
+			session.close();
+			return true;
+		}else {
+			return false;
 		}
-		session.getTransaction().commit();
-		session.close();
-		try {
-			if(loc.getAddress().contentEquals(location.getAddress())) {
-				return 1;
-			} else {
-				return 0;
-			}
-		} catch(NullPointerException e) {
-			return 0;
+		}catch(NullPointerException e) {
+			return false;
 		}
 		
 	}
 	
-	public int addCorporateLocation(Locations location) {
-		if(getLocation(location) == 1) {
-			return 1;
+	public boolean addCorporateLocation(Locations location) {
+		if(getLocation(location.getAddress()) == true) {
+			return false;
 		} else {
 			Session session = sessionFactory.openSession();
 			session.beginTransaction();
 			session.save(location);
 			session.getTransaction().commit();
 			session.close();
-			return 0;
+			return true;
 		}
 	}
 	
