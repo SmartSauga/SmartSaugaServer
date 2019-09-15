@@ -153,7 +153,7 @@ public class LoginController {
 				return 0;
 			}
 		}catch(NumberFormatException e) {
-			return 5;
+			return 0;
 		}
 	
 	}

@@ -35,7 +35,7 @@ public class LocationDao {
 			return 0;
 		}
 		}catch(NullPointerException e) {
-			return 6;
+			return 0;
 		}
 		
 	}
