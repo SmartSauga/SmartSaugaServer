@@ -22,10 +22,10 @@ public class CorporateLocation extends Locations {
 
 
 	public CorporateLocation(String name, String address, double longitude, double latitude, int locUserRating,
-			int wifiRating, LocationType locType, String fileImage, String password) {
+			int wifiRating, LocationType locType, String fileImage, String password, LocationStatus locStatus) {
 		super(name, address, longitude, latitude, locUserRating, wifiRating, locType, fileImage);
 		this.password = password;
-		this.locStatus = LocationStatus.PROPOSED;
+		this.locStatus = locStatus;
 		// TODO Auto-generated constructor stub
 	}
 

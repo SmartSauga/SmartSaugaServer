@@ -143,9 +143,9 @@ public class LoginController {
 			int numWifiRating = Integer.parseInt(wifiRating);
 			LocationType locType = LocationType.toType(category);
 			
-			
+		
 			Locations proposedLocation = new CorporateLocation(name, address, numLongitude, numLatitude, numLocRating, 
-					numWifiRating, locType, photo, password);
+					numWifiRating, locType, photo, password, LocationStatus.PENDINGAPPROVAL);
 			int locAdded = locDao.addCorporateLocation(proposedLocation);
 			if(locAdded == 1) {
 				return 1;
@@ -172,8 +172,8 @@ public class LoginController {
 			LocationType locType = LocationType.toType(category);
 			
 			CorporateLocation  createdLoc = new CorporateLocation(name, address, numLongitude, numLatitude, numLocRating, 
-					numWifiRating, locType, photo, password);
-			createdLoc.setLocStatus(LocationStatus.CITYAPPROVED);
+					numWifiRating, locType, photo, password, LocationStatus.CITYAPPROVED);
+//			createdLoc.setLocStatus(LocationStatus.CITYAPPROVED);
 			
 			if(locDao.addCorporateLocation(createdLoc) == 1) {
 				return 1;
@@ -236,7 +236,7 @@ public class LoginController {
 			
 			
 			CorporateLocation changeLocInfo = new CorporateLocation(name, address, numLongitude, numLatitude, numLocRating, 
-					numWifiRating, locType, photo, password);
+					numWifiRating, locType, photo, password, LocationStatus.APPROVED);
 			changeLocInfo.setLocationId(locid);
 			if(locDao.changeLocInfo(changeLocInfo) == 1) {
 				return 1;
