@@ -25,6 +25,10 @@ public class User {
 	
 	@NotNull(message="Name cannot be null")
 	@Column(length = 80)
+	private String userName;
+	
+	@NotNull(message="Name cannot be null")
+	@Column(length = 80)
 	private String name;
 	
 	@Pattern(regexp="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", message="Email must be valid")
@@ -48,10 +52,11 @@ public class User {
 	//********************************************************
 	
 	
-	public User(String email, String password, String name) {
+	public User(String email, String password, String name, String userName) {
 		this.email = email;
 		this.password = password;
 		this.name = name;
+		this.userName = userName;
 		
 	}
 	

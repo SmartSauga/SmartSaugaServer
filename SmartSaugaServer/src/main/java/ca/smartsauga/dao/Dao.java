@@ -126,9 +126,12 @@ public class Dao {
 		if(!cu.getUserBirthdate().isEmpty()) {
 			modUser.setUserBirthdate(cu.getUserBirthdate().trim());
 		}
-//		if(!cu.getAbout().isEmpty()) {
-//			modUser.setAbout(cu.getAbout().trim());
-//		}
+		if(!cu.getAddress().isEmpty()) {
+			modUser.setAddress(cu.getAddress().trim());
+		}
+		if(!cu.getStatus().isEmpty()) {
+			modUser.setStatus(cu.getStatus().trim());
+		}
 //		if(!cu.getFacebookUrl().isEmpty()) {
 //			modUser.setFacebookUrl(cu.getFacebookUrl().trim());
 //		}
