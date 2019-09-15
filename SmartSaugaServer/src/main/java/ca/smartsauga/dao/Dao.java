@@ -69,6 +69,7 @@ public class Dao {
 		
 	}
 	
+	
 	//returns email for checking if user exists
 	public String getUnvalidatedUser(String email) {
 		CitizenUser citizenUser;
@@ -160,6 +161,16 @@ public class Dao {
 		session.beginTransaction();
 		String email = cu.getEmail();
 		cu.setStatus("Blocked");
+		session.getTransaction().commit();
+		session.close();
+		return 1;
+	}
+	
+	public int unblockUser(CitizenUser cu) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		String email = cu.getEmail();
+		cu.setStatus("verified");
 		session.getTransaction().commit();
 		session.close();
 		return 1;
