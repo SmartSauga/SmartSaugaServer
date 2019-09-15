@@ -75,8 +75,10 @@ public class Dao {
 		String userEmail = "";
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		Query query = session.createQuery("from User WHERE email =: email");
+		Query query = session.createQuery("from User WHERE email =: email AND userName =: userName");
+		
 		query.setParameter("email", email);
+		
 		List<CitizenUser> userList = query.getResultList();
 		session.getTransaction().commit();
 		session.close();
@@ -153,4 +155,13 @@ public class Dao {
 		return true;
 	}
 	
+	public int blockUser(CitizenUser cu) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		String email = cu.getEmail();
+		cu.setStatus("Blocked");
+		session.getTransaction().commit();
+		session.close();
+		return 1;
+	}
 }

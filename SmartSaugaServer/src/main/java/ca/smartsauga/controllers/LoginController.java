@@ -246,5 +246,16 @@ public class LoginController {
 	
 	}
 	
+	@CrossOrigin
+	@RequestMapping(value = "/blockUser/email", method = RequestMethod.POST)
+	public int blockUser(@PathVariable String email) {
+		CitizenUser cUser = dao.getValidatedUser(email);
+		dao.blockUser(cUser);
+		if(dao.blockUser(cUser) == 1) {
+			return 1;
+		}else {
+			return 2;
+		}
+	}
 	
 }
