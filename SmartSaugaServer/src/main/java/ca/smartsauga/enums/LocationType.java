@@ -25,5 +25,28 @@ public enum LocationType {
 		}
 		return LocationType.OTHER;
 	}
-
+	
+	public static String locTypeToString(LocationType type) {
+		
+		switch(type) {
+		
+		case COMMUNITYCENTER:
+			return "COMMUNITY CENTER";
+		case LIBRARY:
+			return "LIBRARY";
+		case BUSSTOP:
+			return "BUS STOP";
+		case COURTHOUSE:
+			return "COURTHOUSE";
+		case CITYHALL:
+			return "CITY HALL";
+		case RESTAURANT:
+			return "RESTAURANT";
+		case MALL:
+			return "MALL";
+		}
+		return "OTHER";
+	}
+	
+	
 }

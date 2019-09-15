@@ -12,6 +12,7 @@ import ca.smartsauga.beans.CitizenUser;
 import ca.smartsauga.beans.CorporateLocation;
 import ca.smartsauga.beans.Locations;
 import ca.smartsauga.enums.LocationStatus;
+import ca.smartsauga.enums.LocationType;
 
 public class LocationDao {
 	SessionFactory sessionFactory = new Configuration().
@@ -77,7 +78,7 @@ public class LocationDao {
 		List<CorporateLocation> locList = (List<CorporateLocation>) query.getResultList();
 		if(locList.size() == 1) {
 			loc = locList.get(0);
-			loc.setLocStatus(status);
+			loc.setLocStatus(LocationStatus.getStatus(status));
 		} else {
 			return 1;
 		}
@@ -113,7 +114,7 @@ public class LocationDao {
 		modLoc.setLocationImageFile(corpLocation.getLocationImageFile());
 		modLoc.setLocStatus(corpLocation.getLocStatus());
 		modLoc.setName(corpLocation.getName());
-		modLoc.setType(corpLocation.getType());
+		modLoc.setLocType(corpLocation.getLocType());
 		
 		session.getTransaction().commit();
 		session.close();

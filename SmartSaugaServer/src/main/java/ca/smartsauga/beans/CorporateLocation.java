@@ -18,11 +18,11 @@ public class CorporateLocation extends Locations {
 	
 	public String password;
 	
-	public LocationStatus locStatus;
+	public String locStatus;
 
 
 	public CorporateLocation(String name, String address, double longitude, double latitude, int locUserRating,
-			int wifiRating, LocationType locType, String fileImage, String password, LocationStatus locStatus) {
+			int wifiRating, String locType, String fileImage, String password, String locStatus) {
 		super(name, address, longitude, latitude, locUserRating, wifiRating, locType, fileImage);
 		this.password = password;
 		this.locStatus = locStatus;

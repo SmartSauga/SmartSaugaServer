@@ -25,7 +25,7 @@ public class Locations {
 	
 	private int wifiRating;
 	
-	private LocationType type;
+	private String locType;
 	
 	private String locationImageFile;
 	
@@ -49,14 +49,14 @@ public class Locations {
 	private int avgWifiRating;
 	*/
 	public Locations(String name, String address, double longitude, double latitude, int locUserRating, int wifiRating,
-			LocationType locType, String fileImage) {
+			String locType, String fileImage) {
 		this.name = name;
 		this.address = address;
 		this.longitude = longitude;
 		this.latitude = latitude;
 		this.locUserRating = locUserRating;
 		this.wifiRating  = wifiRating;
-		this.type = locType;
+		this.locType = locType;
 		this.locationImageFile = fileImage;
 		this.locNumRaters = 0;
 	}
