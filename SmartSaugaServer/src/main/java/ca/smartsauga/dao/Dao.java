@@ -114,7 +114,7 @@ public class Dao {
 //		return modUser;
 //	}
 	
-	public CitizenUser updateProfile(CitizenUser cu) {
+	public CitizenUser updateUserProfile(CitizenUser cu) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		
@@ -127,9 +127,6 @@ public class Dao {
 			modUser.setUserBirthdate(cu.getUserBirthdate().trim());
 		}
 		
-		if(!cu.getStatus().isEmpty()) {
-			modUser.setStatus(cu.getStatus().trim());
-		}
 //		if(!cu.getFacebookUrl().isEmpty()) {
 //			modUser.setFacebookUrl(cu.getFacebookUrl().trim());
 //		}
