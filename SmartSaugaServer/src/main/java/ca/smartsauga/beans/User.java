@@ -38,6 +38,7 @@ public class User {
 	@Size(min=8)
 	private String password;
 	
+	private String type;
 	
 	
 	//Prototype Data - To Be Deleted ************************
@@ -52,11 +53,12 @@ public class User {
 	//********************************************************
 	
 	
-	public User(String email, String password, String name, String userName) {
+	public User(String email, String password, String name, String userName, String type) {
 		this.email = email;
 		this.password = password;
 		this.name = name;
 		this.userName = userName;
+		this.type = type;
 		
 	}
 	

@@ -18,8 +18,8 @@ public class CitizenUser extends User {
 	private String address;
 	private String userBirthdate;
 	private String status;
-	public CitizenUser(String name, String email, String password, String address, String userBirthdate, String status, String userName) {
-		super(email, password, name, userName);
+	public CitizenUser(String name, String email, String password, String address, String userBirthdate, String status, String userName, String type) {
+		super(email, password, name, userName, type);
 		// TODO Auto-generated constructor stub
 		this.address = address;
 		this.userBirthdate = userBirthdate;

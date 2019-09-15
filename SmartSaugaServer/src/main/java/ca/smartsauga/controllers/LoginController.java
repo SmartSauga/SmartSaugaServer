@@ -47,7 +47,7 @@ public class LoginController {
 	}
 	
 	@CrossOrigin
-	@RequestMapping(value = "/updateProfile/{email}/{name}/{birthdate}/{address}/{status}", method = RequestMethod.POST)
+	@RequestMapping(value = "/updateProfile/{email}/{name}/{birthdate}/{address}/{status}/{type}", method = RequestMethod.POST)
 	public CitizenUser updateProfile(@PathVariable String email, @PathVariable String name, @PathVariable String birthdate, @PathVariable String address, @PathVariable String Status) {
 		
 		CitizenUser user = dao.getValidatedUser(email);
