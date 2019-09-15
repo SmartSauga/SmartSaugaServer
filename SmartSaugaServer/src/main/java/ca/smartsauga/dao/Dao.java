@@ -159,8 +159,8 @@ public class Dao {
 	public int blockUser(CitizenUser cu) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		String email = cu.getEmail();
-		cu.setStatus("Blocked");
+		CitizenUser modUser = (CitizenUser) session.get(CitizenUser.class, cu.getUserId());
+		modUser.setStatus("Blocked");
 		session.getTransaction().commit();
 		session.close();
 		return 1;
@@ -169,7 +169,7 @@ public class Dao {
 	public int unblockUser(CitizenUser cu) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		String email = cu.getEmail();
+		CitizenUser modUser = (CitizenUser) session.get(CitizenUser.class, cu.getUserId());
 		cu.setStatus("verified");
 		session.getTransaction().commit();
 		session.close();
