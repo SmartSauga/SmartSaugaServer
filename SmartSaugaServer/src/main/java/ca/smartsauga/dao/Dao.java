@@ -59,7 +59,7 @@ public class Dao {
 		
 	}
 	
-	public void registerCitizenUser(CitizenUser user) {
+	public void registerCitizenUser(User user) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		user.setPassword(passwordController.encrypt(user.getPassword()));
