@@ -25,31 +25,34 @@ public class User {
 	
 	@NotNull(message="Name cannot be null")
 	@Column(length = 80)
+	private String name;
+	
 	@Pattern(regexp="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", message="Email must be valid")
 	private String email;
-	
-	private String imageFileName;
 	
 	@NotNull(message="Password cannot be null")
 	@Size(min=8)
 	private String password;
 	
-	@NotNull(message="User must have a status")
-	UserStatus status;
+	
 	
 	//Prototype Data - To Be Deleted ************************
-	private String name;
-	private String birthdate;
-	private String about;
-	private String facebookUrl;
-	private String notes;
+	
+//	private String birthdate;
+//	
+//	private String about;
+//	
+//	private String facebookUrl;
+//	
+//	private String notes;
 	//********************************************************
 	
 	
-	public User(String email, String password) {
+	public User(String email, String password, String name) {
 		this.email = email;
 		this.password = password;
-		this.status = UserStatus.UNVERIFIED;
+		this.name = name;
+		
 	}
 	
 

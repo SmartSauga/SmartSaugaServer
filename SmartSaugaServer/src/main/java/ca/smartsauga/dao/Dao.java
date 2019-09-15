@@ -87,7 +87,34 @@ public class Dao {
 			return userEmail;
 		}
 	}
-	public CitizenUser modifyProfile(CitizenUser cu) {
+//	public CitizenUser modifyProfile(CitizenUser cu) {
+//		Session session = sessionFactory.openSession();
+//		session.beginTransaction();
+//		
+//
+//		CitizenUser modUser = (CitizenUser) session.get(CitizenUser.class, cu.getUserId());
+//		if(!cu.getName().isEmpty()) {
+//			modUser.setName(cu.getName().trim());
+//		}
+//		if(!cu.getBirthdate().isEmpty()) {
+//			modUser.setBirthdate(cu.getBirthdate().trim());
+//		}
+//		if(!cu.getAbout().isEmpty()) {
+//			modUser.setAbout(cu.getAbout().trim());
+//		}
+//		if(!cu.getFacebookUrl().isEmpty()) {
+//			modUser.setFacebookUrl(cu.getFacebookUrl().trim());
+//		}
+//		if(!cu.getNotes().isEmpty()) {
+//			modUser.setNotes(cu.getNotes().trim());
+//		}
+//		session.getTransaction().commit();
+//		session.close();
+//		
+//		return modUser;
+//	}
+	
+	public CitizenUser updateProfile(CitizenUser cu) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		
@@ -96,18 +123,18 @@ public class Dao {
 		if(!cu.getName().isEmpty()) {
 			modUser.setName(cu.getName().trim());
 		}
-		if(!cu.getBirthdate().isEmpty()) {
-			modUser.setBirthdate(cu.getBirthdate().trim());
+		if(!cu.getUserBirthdate().isEmpty()) {
+			modUser.setUserBirthdate(cu.getUserBirthdate().trim());
 		}
-		if(!cu.getAbout().isEmpty()) {
-			modUser.setAbout(cu.getAbout().trim());
-		}
-		if(!cu.getFacebookUrl().isEmpty()) {
-			modUser.setFacebookUrl(cu.getFacebookUrl().trim());
-		}
-		if(!cu.getNotes().isEmpty()) {
-			modUser.setNotes(cu.getNotes().trim());
-		}
+//		if(!cu.getAbout().isEmpty()) {
+//			modUser.setAbout(cu.getAbout().trim());
+//		}
+//		if(!cu.getFacebookUrl().isEmpty()) {
+//			modUser.setFacebookUrl(cu.getFacebookUrl().trim());
+//		}
+//		if(!cu.getNotes().isEmpty()) {
+//			modUser.setNotes(cu.getNotes().trim());
+//		}
 		session.getTransaction().commit();
 		session.close();
 		

@@ -12,20 +12,18 @@ import lombok.*;
 @Entity
 public class CitizenUser extends User {
 	
-	//Needs Status Enum eventually
+	
 	private LocalDate joinDate;
 	private LocalDate lastLoggedDate;
-	
-	private String name;
-	private String streetAddress;
-	private String cityName;
-	private String province;
-	private LocalDate userBirthdate;
-	private String email;
-	
-	public CitizenUser(String email, String password) {
-		super(email, password);
+	private String address;
+	private String userBirthdate;
+	private String status;
+	public CitizenUser(String name, String email, String password, String address, String userBirthdate, String status) {
+		super(email, password, name);
 		// TODO Auto-generated constructor stub
+		this.address = address;
+		this.userBirthdate = userBirthdate;
+		this.status = status;
 	}
 	
 	

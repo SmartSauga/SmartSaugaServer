@@ -47,19 +47,18 @@ public class LoginController {
 	}
 	
 	@CrossOrigin
-	@RequestMapping(value = "/updateProfile/{email}/{name}/{birthdate}/{about}/{facebookurl}/{notes}", method = RequestMethod.POST)
-	public CitizenUser updateProfile(@PathVariable String email, @PathVariable String name, @PathVariable String birthdate,
-			@PathVariable String about, @PathVariable String facebookurl, @PathVariable String notes) {
+	@RequestMapping(value = "/updateProfile/{email}/{name}/{birthdate}/", method = RequestMethod.POST)
+	public CitizenUser updateProfile(@PathVariable String email, @PathVariable String name, @PathVariable String birthdate) {
 		
 		CitizenUser user = dao.getValidatedUser(email);
 		
 		user.setName(name);
-		user.setBirthdate(birthdate);
-		user.setAbout(about);
-		user.setFacebookUrl(facebookurl);
-		user.setNotes(notes);
+		user.setUserBirthdate(birthdate);
+//		user.setAbout(about);
+//		user.setFacebookUrl(facebookurl);
+//		user.setNotes(notes);
 		
-		return dao.modifyProfile(user);
+		return dao.updateProfile(user);
 		
 	}
 	
@@ -131,7 +130,7 @@ public class LoginController {
 	}
 	//1 successful and 0 unsuccessful
 	@CrossOrigin
-	@RequestMapping(value = "/ProposeLocation/{name}/{address}/{password}/{photo}/{wifiRating}/{category}/{locRating}/{category}/{comment}/{longitude}/{latitude}", 
+	@RequestMapping(value = "/ProposeLocation/{name}/{address}/{password}/{photo}/{wifiRating}/{locRating}/{category}/{comment}/{longitude}/{latitude}", 
 	method = RequestMethod.POST)
 	public int proposeLocation(@PathVariable String name, @PathVariable String password, @PathVariable String photo, @PathVariable String wifiRating,
 			@PathVariable String locRating, @PathVariable String category, @PathVariable String comment, 
