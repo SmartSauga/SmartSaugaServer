@@ -31,7 +31,7 @@ public class LoginController {
 	@CrossOrigin
 	@RequestMapping(value = "/registerUser/{email}/{password}/{name}/{status}/{type}/{birthday}", method = RequestMethod.POST)
 	public User registerCitizenUser(@PathVariable String email, @PathVariable String password, @PathVariable String name, @PathVariable String status, @PathVariable String type, @PathVariable String birthday) {
-//		String name, String email, String password, String address, String userBirthdate, String status, String userName, String type
+
 		if(!email.contentEquals(dao.getUnvalidatedUser(email))) {
 			User newUser = new CitizenUser(name,email,password,birthday,status,type);
 			newUser.setEmail(email);

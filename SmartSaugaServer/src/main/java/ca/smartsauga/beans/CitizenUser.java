@@ -13,9 +13,7 @@ import lombok.*;
 public class CitizenUser extends User {
 	
 	
-//	private LocalDate joinDate;
-//	private LocalDate lastLoggedDate;
-//	private String address;
+
 	private String userBirthdate;
 	private String status;
 	public CitizenUser(String name, String email, String password, String userBirthdate, String status, String type) {
