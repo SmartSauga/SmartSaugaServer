@@ -23,9 +23,6 @@ public class User {
 	@GeneratedValue
 	private int userId;
 	
-	@NotNull(message="Name cannot be null")
-	@Column(length = 80)
-	private String userName;
 	
 	@NotNull(message="Name cannot be null")
 	@Column(length = 80)
@@ -53,11 +50,10 @@ public class User {
 	//********************************************************
 	
 	
-	public User(String email, String password, String name, String userName, String type) {
+	public User(String email, String password, String name, String type) {
 		this.email = email;
 		this.password = password;
 		this.name = name;
-		this.userName = userName;
 		this.type = type;
 		
 	}

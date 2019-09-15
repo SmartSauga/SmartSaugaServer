@@ -170,7 +170,7 @@ public class Dao {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		CitizenUser modUser = (CitizenUser) session.get(CitizenUser.class, cu.getUserId());
-		cu.setStatus("verified");
+		modUser.setStatus("verified");
 		session.getTransaction().commit();
 		session.close();
 		return 1;
