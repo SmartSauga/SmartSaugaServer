@@ -146,13 +146,14 @@ public class LoginController {
 			
 			Locations proposedLocation = new CorporateLocation(name, address, numLongitude, numLatitude, numLocRating, 
 					numWifiRating, locType, photo, password);
-			if(locDao.addCorporateLocation(proposedLocation) == true) {
+			Boolean locAdded = locDao.addCorporateLocation(proposedLocation);
+			if(locAdded == true) {
 				return 1;
 			} else {
 				return 0;
 			}
 		}catch(NumberFormatException e) {
-			return 0;
+			return 5;
 		}
 	
 	}
