@@ -29,15 +29,15 @@ public class LoginController {
 	PasswordController passwordController = new PasswordController();
 	
 	@CrossOrigin
-	@RequestMapping(value = "/registerUser/{email}/{password}", method = RequestMethod.POST)
-	public CitizenUser registerUser(@PathVariable String email, @PathVariable String password) {
-		
+	@RequestMapping(value = "/registerUser/{email}/{password}/{name}/{status}/{userName}/{type}/{birthday}", method = RequestMethod.POST)
+	public CitizenUser registerUser(@PathVariable String email, @PathVariable String password, @PathVariable String name, @PathVariable String status, @PathVariable String userName, @PathVariable String type, @PathVariable String birthday) {
+//		String name, String email, String password, String address, String userBirthdate, String status, String userName, String type
 		if(!email.contentEquals(dao.getUnvalidatedUser(email))) {
-			CitizenUser newUser = new CitizenUser();
+			CitizenUser newUser = new CitizenUser(name,email,password,birthday,status,userName,type);
 			newUser.setEmail(email);
 			newUser.setPassword(password);
 			System.out.println("**************** " + newUser.getEmail() + " ***********************************");
-			dao.registerUser(newUser);
+			dao.registerCitizenUser(newUser);
 			System.out.println(newUser.getEmail());
 			return newUser;
 		} else {
@@ -54,7 +54,7 @@ public class LoginController {
 		System.out.println(user.getEmail());
 		user.setName(name);
 		user.setUserBirthdate(birthdate);
-		user.setAddress(address);
+		
 		user.setStatus("Verified");
 //		user.setAbout(about);
 //		user.setFacebookUrl(facebookurl);

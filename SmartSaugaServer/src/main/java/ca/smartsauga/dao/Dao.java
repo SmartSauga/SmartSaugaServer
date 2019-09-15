@@ -59,7 +59,7 @@ public class Dao {
 		
 	}
 	
-	public void registerUser(CitizenUser user) {
+	public void registerCitizenUser(CitizenUser user) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		user.setPassword(passwordController.encrypt(user.getPassword()));
@@ -126,9 +126,7 @@ public class Dao {
 		if(!cu.getUserBirthdate().isEmpty()) {
 			modUser.setUserBirthdate(cu.getUserBirthdate().trim());
 		}
-		if(!cu.getAddress().isEmpty()) {
-			modUser.setAddress(cu.getAddress().trim());
-		}
+		
 		if(!cu.getStatus().isEmpty()) {
 			modUser.setStatus(cu.getStatus().trim());
 		}
