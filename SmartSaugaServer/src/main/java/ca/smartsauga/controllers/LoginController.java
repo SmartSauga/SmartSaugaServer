@@ -131,7 +131,7 @@ public class LoginController {
 	}
 	//1 successful and 0 unsuccessful
 	@CrossOrigin
-	@RequestMapping(value = "/ProposeLocation/{name}/{address}/{password}/{photo}/{wifiRating}/{locRating}/{category}/{comment}/{longitude}/{latitude}", 
+	@RequestMapping(value = "/ProposeLocation/{name}/{address}/{password}/{photo}/{wifiRating}/{type}/{locRating}/{category}/{comment}/{longitude}/{latitude}", 
 	method = RequestMethod.POST)
 	public int proposeLocation(@PathVariable String name, @PathVariable String password, @PathVariable String photo, @PathVariable String wifiRating,
 			@PathVariable String locRating, @PathVariable String category, @PathVariable String comment, 

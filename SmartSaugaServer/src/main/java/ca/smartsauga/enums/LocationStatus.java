@@ -46,7 +46,7 @@ public enum LocationStatus {
 		case PROPOSED:
 			return "PROPOSED";
 		case PENDINGAPPROVAL:
-			return "Pending Approval";
+			return "PENDING APPROVAl";
 		case APPROVED:
 			return"APPROVED";
 		case INVALIDIMAGE:
