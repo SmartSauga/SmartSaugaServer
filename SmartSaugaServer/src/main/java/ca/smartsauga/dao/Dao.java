@@ -76,7 +76,7 @@ public class Dao {
 		String userEmail = "";
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		Query query = session.createQuery("from User WHERE email =: email AND userName =: userName");
+		Query query = session.createQuery("from User WHERE email =: email");
 		
 		query.setParameter("email", email);
 		
