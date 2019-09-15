@@ -142,10 +142,10 @@ public class LoginController {
 			int numLocRating = Integer.parseInt(locRating);
 			int numWifiRating = Integer.parseInt(wifiRating);
 			LocationType locType = LocationType.toType(category);
-			
+			LocationStatus status = null;
 		
 			Locations proposedLocation = new CorporateLocation(name, address, numLongitude, numLatitude, numLocRating, 
-					numWifiRating, locType, photo, password, LocationStatus.PENDINGAPPROVAL);
+					numWifiRating, locType, photo, password, LocationStatus.PENDINGAPPROVAL );
 			int locAdded = locDao.addCorporateLocation(proposedLocation);
 			if(locAdded == 1) {
 				return 1;

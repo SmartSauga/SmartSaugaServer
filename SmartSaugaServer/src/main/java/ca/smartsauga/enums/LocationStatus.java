@@ -2,8 +2,19 @@ package ca.smartsauga.enums;
 
 public enum LocationStatus {
 	
-	PROPOSED, PENDINGAPPROVAL, APPROVED, INVALIDIMAGE, DENIED, REMOVED, BLOCKED, CITYAPPROVED;
+	PROPOSED("PROPOSED"), 
+	PENDINGAPPROVAL("PENDING APPROVAL"), 
+	APPROVED("APPROVED"), 
+	INVALIDIMAGE("INVALID IMAGE"), 
+	DENIED("DENIED"), 
+	REMOVED("REMOVED"), 
+	BLOCKED("BLOCKED"), 
+	CITYAPPROVED("CITY APPROVED");
 	
+	private final String status;
+	private LocationStatus(String status) {
+		this.status = status;
+	}
 	public static LocationStatus toStatus(String status) {
 		
 		switch(status) {
@@ -27,5 +38,28 @@ public enum LocationStatus {
 		}
 		return LocationStatus.PROPOSED;
 	}
-
+	
+	public static String getStatus(LocationStatus status) {
+		
+		switch(status) {
+		
+		case PROPOSED:
+			return "PROPOSED";
+		case PENDINGAPPROVAL:
+			return "Pending Approval";
+		case APPROVED:
+			return"APPROVED";
+		case INVALIDIMAGE:
+			return "INVALID IMAGE";
+		case DENIED:
+			return "DENIED";
+		case REMOVED:
+			return "REMOVED";
+		case BLOCKED:
+			return "BLOCKED";
+		case CITYAPPROVED:
+			return "CITY APPROVED";
+		}
+		return "PROPOSED";
+	}
 }
