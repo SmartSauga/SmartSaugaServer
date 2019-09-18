@@ -34,6 +34,7 @@ public class User {
 	private String email;
 	
 	@NotNull(message="Password cannot be null")
+	@Pattern(regexp="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,8}$", message="invalid password")
 	private String password;
 	
 	@NotNull(message="Type cannot be null")

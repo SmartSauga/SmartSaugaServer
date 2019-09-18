@@ -18,7 +18,7 @@
 
 		<!-- Drop and re-create the database schema on startup -->
 		<!-- If you leave this as create, eventually you'll wipe out DB, change to UPDATE and use tables that exist -->
-		<property name="hbm2ddl.auto">create</property>
+		<property name="hbm2ddl.auto">update</property>
 
 		<!-- dbcp connection pool configuration -->
 		<property name="dbcp.initialSize">5</property>
