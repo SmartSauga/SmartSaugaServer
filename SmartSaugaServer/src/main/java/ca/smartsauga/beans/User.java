@@ -34,7 +34,6 @@ public class User {
 	private String email;
 	
 	@NotNull(message="Password cannot be null")
-	@Size(min=6, max=8, message="Size should be between 6 to 8")
 	@Pattern(regexp="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,8}$", message="Password must be 6 to 8 characters with atleast one digit, upper case letter, lower case letter, and a special character")
 	private String password;
 	
