@@ -41,10 +41,21 @@ public class LocationDao {
 		
 	}
 	
+//	public int addCorporateLocation(Locations location) {
+//		if(getLocation(location.getAddress()) == 1) {
+//			return 0;
+//		} else {
+//			Session session = sessionFactory.openSession();
+//			session.beginTransaction();
+//			session.save(location);
+//			session.getTransaction().commit();
+//			session.close();
+//			return 1;
+//		}
+//	}
+	
 	public int addCorporateLocation(Locations location) {
-		if(getLocation(location.getAddress()) == 1) {
-			return 0;
-		} else {
+	
 			Session session = sessionFactory.openSession();
 			session.beginTransaction();
 			session.save(location);
@@ -52,7 +63,7 @@ public class LocationDao {
 			session.close();
 			return 1;
 		}
-	}
+	
 	
 	public int removeLocation(int id) {
 		

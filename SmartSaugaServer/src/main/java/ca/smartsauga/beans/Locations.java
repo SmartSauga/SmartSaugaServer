@@ -1,6 +1,7 @@
 package ca.smartsauga.beans;
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import ca.smartsauga.enums.LocationStatus;
 import ca.smartsauga.enums.LocationType;
@@ -25,6 +26,7 @@ public class Locations {
 	
 	private int wifiRating;
 	
+	@NotNull(message="Type cannot be null")
 	private String locType;
 	
 	private String locationImageFile;
@@ -36,18 +38,7 @@ public class Locations {
 	@Column(nullable=false)
 	private double latitude;
 	
-	//@Column(name="message_strings",nullable=true,length=150)
-	//private String[] messageStrings;
-	/*
-	private int ratings;
 	
-	@Column(nullable=true)
-	private String image;
-	
-	private String category;
-	
-	private int avgWifiRating;
-	*/
 	public Locations(String name, String address, double longitude, double latitude, int locUserRating, int wifiRating,
 			String locType, String fileImage) {
 		this.name = name;

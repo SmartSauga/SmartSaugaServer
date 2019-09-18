@@ -16,15 +16,15 @@ import lombok.NoArgsConstructor;
 
 public class CorporateLocation extends Locations {
 	
-	public String password;
+	
 	
 	public String locStatus;
 
 
 	public CorporateLocation(String name, String address, double longitude, double latitude, int locUserRating,
-			int wifiRating, String locType, String fileImage, String password, String locStatus) {
+			int wifiRating, String locType, String fileImage, String locStatus) {
 		super(name, address, longitude, latitude, locUserRating, wifiRating, locType, fileImage);
-		this.password = password;
+		
 		this.locStatus = locStatus;
 		// TODO Auto-generated constructor stub
 	}
