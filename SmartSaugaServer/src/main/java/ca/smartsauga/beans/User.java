@@ -36,8 +36,7 @@ public class User {
 	private String email;
 	
 	
-	@Min(value=6, message="password should be atleast 6 characters")
-	@Max(value=8, message="password should be atleast 8 characters")
+	@NotNull(message="Password cannot be empty")
 	private String password;
 	
 	@NotNull(message="Type cannot be null")
