@@ -159,7 +159,7 @@ public class LoginController {
 	@CrossOrigin
 	@RequestMapping(value = "/ADMINCreateLocation/{name}/{address}/{photo}/{wifiRating}/{locRating}/{category}/{longitude}/{latitude}", 
 	method = RequestMethod.POST)
-	public int adminCreateLocation(@PathVariable String name, @PathVariable String password, @PathVariable String photo, @PathVariable String wifiRating,
+	public int adminCreateLocation(@PathVariable String name,@PathVariable String photo, @PathVariable String wifiRating,
 			@PathVariable String locRating, @PathVariable String category, 
 			@PathVariable String longitude, @PathVariable String latitude, @PathVariable String address) {
 		try {
