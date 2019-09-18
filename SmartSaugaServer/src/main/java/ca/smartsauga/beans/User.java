@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+
 import lombok.*;
 
 @AllArgsConstructor
@@ -34,7 +34,7 @@ public class User {
 	private String email;
 	
 	@NotNull(message="Password cannot be null")
-	@Pattern(regexp="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,8}$", message="Password must be 6 to 8 characters with atleast one digit, upper case letter, lower case letter, and a special character")
+	@Pattern(regexp="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,8}$", message="Invalid password")
 	private String password;
 	
 	@NotNull(message="Type cannot be null")
