@@ -22,11 +22,11 @@ public class User {
 	
 	
 	@NotNull(message="Name cannot be empty")
-	@Column(length = 20)
+	@Column(length = 40)
 	private String firstname;
 	
 	@NotNull(message="Name cannot be empty")
-	@Column(length = 20)
+	@Column(length = 40)
 	private String lastname;
 	
 	@NotNull(message="Email cannot be empty")
