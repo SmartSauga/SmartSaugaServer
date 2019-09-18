@@ -29,11 +29,11 @@ public class LoginController {
 	PasswordController passwordController = new PasswordController();
 	
 	@CrossOrigin
-	@RequestMapping(value = "/registerUser/{email}/{password}/{name}/{status}/{type}/{birthday}", method = RequestMethod.POST)
-	public User registerCitizenUser(@PathVariable String email, @PathVariable String password, @PathVariable String name, @PathVariable String status, @PathVariable String type, @PathVariable String birthday) {
+	@RequestMapping(value = "/registerUser/{email}/{password}/{firstname}/{lastname}/{status}/{type}/{birthday}", method = RequestMethod.POST)
+	public User registerCitizenUser(@PathVariable String email, @PathVariable String password, @PathVariable String firstname,@PathVariable String lastname, @PathVariable String status, @PathVariable String type, @PathVariable String birthday) {
 
 		if(!email.contentEquals(dao.getUnvalidatedUser(email))) {
-			User newUser = new CitizenUser(name,email,password,birthday,status,type);
+			User newUser = new CitizenUser(firstname,lastname,email,password,birthday,status,type);
 			newUser.setEmail(email);
 			newUser.setPassword(password);
 			System.out.println("**************** " + newUser.getEmail() + " ***********************************");
@@ -47,12 +47,13 @@ public class LoginController {
 	}
 	
 	@CrossOrigin
-	@RequestMapping(value = "/updateProfile/{email}/{name}/{birthdate}", method = RequestMethod.POST)
-	public CitizenUser updateProfile(@PathVariable String email, @PathVariable String name, @PathVariable String birthdate) {
+	@RequestMapping(value = "/updateProfile/{email}/{firstname}/{lastname}/{birthdate}", method = RequestMethod.POST)
+	public CitizenUser updateProfile(@PathVariable String email, @PathVariable String firstname, @PathVariable String lastname, @PathVariable String birthdate) {
 		
 		CitizenUser user = dao.getValidatedUser(email);
 		System.out.println(user.getEmail());
-		user.setName(name);
+		user.setFirstname(firstname);
+		user.setLastname(lastname);
 		user.setUserBirthdate(birthdate);
 	
 		

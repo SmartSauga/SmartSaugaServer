@@ -123,19 +123,19 @@ public class Dao {
 		
 
 		CitizenUser modUser = (CitizenUser) session.get(CitizenUser.class, cu.getUserId());
-		if(!cu.getName().isEmpty()) {
-			modUser.setName(cu.getName().trim());
+		if(!cu.getFirstname().isEmpty()) {
+			modUser.setFirstname(cu.getFirstname().trim());
 		}
+		
+		if(!cu.getLastname().isEmpty()) {
+			modUser.setLastname(cu.getLastname().trim());
+		}
+		
 		if(!cu.getUserBirthdate().isEmpty()) {
 			modUser.setUserBirthdate(cu.getUserBirthdate().trim());
 		}
 		
-//		if(!cu.getFacebookUrl().isEmpty()) {
-//			modUser.setFacebookUrl(cu.getFacebookUrl().trim());
-//		}
-//		if(!cu.getNotes().isEmpty()) {
-//			modUser.setNotes(cu.getNotes().trim());
-//		}
+
 		session.getTransaction().commit();
 		session.close();
 		
