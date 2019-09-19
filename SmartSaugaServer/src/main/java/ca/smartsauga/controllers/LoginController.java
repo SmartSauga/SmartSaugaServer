@@ -77,27 +77,24 @@ public class LoginController {
 	
 	@CrossOrigin
 	@RequestMapping(value = "/validateUser/{email}/{password}", method = RequestMethod.POST)
-	public ArrayList<String> validateUser(@PathVariable String email, @PathVariable String password) {
-		CitizenUser valUser = null;
-		ArrayList<String>userData = new ArrayList<String>();
-		//TODO: We want to check the password passed to the DAO that gets the password without instantiating a variable
-		//TODO: dao.validateUser will return a decrypted Password
-		//If Password is correct, return a CitizenUser else return null, handle at front end
-		//Return a profile
+	public boolean validateUser(@PathVariable String email, @PathVariable String password) {
+		
 		if(passwordController.encrypt(password).contentEquals(dao.getValidatedUser(email).getPassword())) {
 			System.out.println(dao.getValidatedUser(email).getEmail());
-			valUser = dao.getValidatedUser(email);
-			userData.add(valUser.getFirstname());
-			userData.add(valUser.getLastname());
-			userData.add(valUser.getStatus());
-			userData.add(valUser.getUserBirthdate());
-			userData.add(String.valueOf(valUser.getUserId()));
-			userData.add(valUser.getType());
-			return userData;
+			return true;
 		} else {
-			return userData;
+			return false;
 		}
 	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/returnValidateUser/{email}}", method = RequestMethod.POST)
+	public CitizenUser getValidatedUserForFront(@PathVariable String email) {
+		CitizenUser user = dao.getValidatedUser(email);
+		return user;
+		
+	}
+		
 	//******************************
 	//This is for a prototype demonstration of the power of the REST server
 	//Will not be in final version
