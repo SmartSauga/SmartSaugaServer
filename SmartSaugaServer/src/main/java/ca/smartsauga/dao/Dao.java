@@ -49,12 +49,16 @@ public class Dao {
 		Query query = session.createQuery("from User WHERE email =:email");
 		query.setParameter("email", email);
 		List<CitizenUser> userList = (List<CitizenUser>) query.getResultList();
-		if(userList.size() == 1) {
-			user = userList.get(0);
-			session.getTransaction().commit();
-			session.close();
-			return user;
-		}else {
+		try {
+			if(userList.size() == 1) {
+				user = userList.get(0);
+				session.getTransaction().commit();
+				session.close();
+				return user;
+			}else {
+				return null;
+			}
+		}catch(NullPointerException e) {
 			return null;
 		}
 		
