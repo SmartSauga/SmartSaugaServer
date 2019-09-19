@@ -51,10 +51,12 @@ public class Dao {
 		List<CitizenUser> userList = (List<CitizenUser>) query.getResultList();
 		if(userList.size() == 1) {
 			user = userList.get(0);
+			session.getTransaction().commit();
+			session.close();
+			return user;
+		}else {
+			return null;
 		}
-		session.getTransaction().commit();
-		session.close();
-		return user;
 		
 		
 	}

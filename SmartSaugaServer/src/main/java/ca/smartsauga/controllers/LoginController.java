@@ -101,7 +101,9 @@ public class LoginController {
 		//TODO: dao.validateUser will return a decrypted Password
 		//If Password is correct, return a CitizenUser else return null, handle at front end
 		//Return a profile
-		if(passwordController.encrypt(password).contentEquals(dao.getValidatedUser(email).getPassword())) {
+		if(dao.getValidatedUser(email) == null) {
+			return null;
+		}else if(passwordController.encrypt(password).contentEquals(dao.getValidatedUser(email).getPassword())) {
 			return dao.getValidatedUser(email);
 		} else {
 			return null;
