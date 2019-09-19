@@ -77,38 +77,47 @@ public class LoginController {
 	
 	@CrossOrigin
 	@RequestMapping(value = "/validateUser/{email}/{password}", method = RequestMethod.POST)
-	public CitizenUser validateUser(@PathVariable String email, @PathVariable String password) {
-		
+	public ArrayList<String> validateUser(@PathVariable String email, @PathVariable String password) {
+		CitizenUser valUser = null;
+		ArrayList<String>userData = new ArrayList<String>();
 		//TODO: We want to check the password passed to the DAO that gets the password without instantiating a variable
 		//TODO: dao.validateUser will return a decrypted Password
 		//If Password is correct, return a CitizenUser else return null, handle at front end
 		//Return a profile
 		if(passwordController.encrypt(password).contentEquals(dao.getValidatedUser(email).getPassword())) {
 			System.out.println(dao.getValidatedUser(email).getEmail());
-			return dao.getValidatedUser(email);
+			valUser = dao.getValidatedUser(email);
+			userData.add(valUser.getFirstname());
+			userData.add(valUser.getLastname());
+			userData.add(valUser.getStatus());
+			userData.add(valUser.getUserBirthdate());
+			userData.add(String.valueOf(valUser.getUserId()));
+			userData.add(valUser.getType());
+			return userData;
 		} else {
-			return null;
+			return userData;
 		}
 	}
 	//******************************
 	//This is for a prototype demonstration of the power of the REST server
 	//Will not be in final version
-	@CrossOrigin
-	@RequestMapping(value = "/validateUserGET/{email}/{password}", method = RequestMethod.GET)
-	public CitizenUser validateUserGET(@PathVariable String email, @PathVariable String password) {
-		
-		//TODO: We want to check the password passed to the DAO that gets the password without instantiating a variable
-		//TODO: dao.validateUser will return a decrypted Password
-		//If Password is correct, return a CitizenUser else return null, handle at front end
-		//Return a profile
-		if(dao.getValidatedUser(email) == null) {
-			return null;
-		}else if(passwordController.encrypt(password).contentEquals(dao.getValidatedUser(email).getPassword())) {
-			return dao.getValidatedUser(email);
-		} else {
-			return null;
-		}
-	}
+//	@CrossOrigin
+//	@RequestMapping(value = "/validateUserGET/{email}/{password}", method = RequestMethod.GET)
+//	public CitizenUser validateUserGET(@PathVariable String email, @PathVariable String password) {
+//		
+//		//TODO: We want to check the password passed to the DAO that gets the password without instantiating a variable
+//		//TODO: dao.validateUser will return a decrypted Password
+//		//If Password is correct, return a CitizenUser else return null, handle at front end
+//		//Return a profile
+//		if(dao.getValidatedUser(email)email == null) {
+//			return null;
+//		}
+//		else if(passwordController.encrypt(password).contentEquals(dao.getValidatedUser(email).getPassword())) {
+//			return dao.getValidatedUser(email);
+//		} else {
+//			return null;
+//		}
+//	}
 	//**********************************
 	
 	@CrossOrigin
