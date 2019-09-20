@@ -30,7 +30,7 @@ public class LoginController {
 	
 	@CrossOrigin
 	@RequestMapping(value = "/registerUser/{email}/{password}/{firstname}/{lastname}/{status}/{type}/{birthday}", method = RequestMethod.POST)
-	public User registerCitizenUser(@PathVariable String email, @PathVariable String password, @PathVariable String firstname,@PathVariable String lastname, @PathVariable String status, @PathVariable String type, @PathVariable String birthday) {
+	public int registerCitizenUser(@PathVariable String email, @PathVariable String password, @PathVariable String firstname,@PathVariable String lastname, @PathVariable String status, @PathVariable String type, @PathVariable String birthday) {
 
 		if(!email.contentEquals(dao.getUnvalidatedUser(email))) {
 			User newUser = new CitizenUser(firstname,lastname,email,password,birthday,status,type);
@@ -39,9 +39,9 @@ public class LoginController {
 			System.out.println("**************** " + newUser.getEmail() + " ***********************************");
 			dao.registerCitizenUser(newUser);
 			System.out.println(newUser.getEmail());
-			return newUser;
+			return 1;
 		} else {
-			return null;
+			return 0;
 		}
 		
 	}
@@ -124,8 +124,8 @@ public class LoginController {
 	@RequestMapping(value = "/GetLocations", method = RequestMethod.GET)
 	public List<Locations> getLocations() {
 		
-		return dao.getAllLocations();
-		
+		List<Locations>locationList = dao.getAllLocations();
+		return  locationList;
 	}
 	
 	@CrossOrigin
