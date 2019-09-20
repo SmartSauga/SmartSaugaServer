@@ -167,33 +167,33 @@ public class LoginController {
 	
 	}
 	
-//	@CrossOrigin
-//	@RequestMapping(value = "/ADMINCreateLocation/{name}/{address}/{photo}/{wifiRating}/{locRating}/{category}/{longitude}/{latitude}", 
-//	method = RequestMethod.POST)
-//	public int adminCreateLocation(@PathVariable String name,@PathVariable String photo, @PathVariable String wifiRating,
-//			@PathVariable String locRating, @PathVariable String category, 
-//			@PathVariable String longitude, @PathVariable String latitude, @PathVariable String address) {
-//		try {
-//			double numLongitude = Double.parseDouble(longitude);
-//			double numLatitude = Double.parseDouble(latitude);
-//			int numLocRating = Integer.parseInt(locRating);
-//			int numWifiRating = Integer.parseInt(wifiRating);
-//			LocationType locType = LocationType.toType(category);
-//			
-//			Locations  createdLoc = new Locations(name, address, numLongitude, numLatitude, numLocRating, 
-//					numWifiRating, photo, category, "City Approved");
-////			createdLoc.setLocStatus(LocationStatus.CITYAPPROVED);
-//			int res = locDao.addCorporateLocation(createdLoc);
-//			if(res == 1) {
-//				return 1;
-//			} else {
-//				return 0;
-//			}
-//		}catch(NumberFormatException e) {
-//			return 0;
-//		}
-//	
-//	}
+	@CrossOrigin
+	@RequestMapping(value = "/ADMINCreateLocation/{name}/{address}/{photo}/{wifiRating}/{locRating}/{category}/{longitude}/{latitude}", 
+	method = RequestMethod.POST)
+	public int adminCreateLocation(@PathVariable String name,@PathVariable String photo, @PathVariable String wifiRating,
+			@PathVariable String locRating, @PathVariable String category, 
+			@PathVariable String longitude, @PathVariable String latitude, @PathVariable String address) {
+		try {
+			double numLongitude = Double.parseDouble(longitude);
+			double numLatitude = Double.parseDouble(latitude);
+			int numLocRating = Integer.parseInt(locRating);
+			int numWifiRating = Integer.parseInt(wifiRating);
+			LocationType locType = LocationType.toType(category);
+			
+			Locations  createdLoc = new Locations(name, address, numLongitude, numLatitude, numLocRating, 
+					numWifiRating, photo, category);
+//			createdLoc.setLocStatus(LocationStatus.CITYAPPROVED);
+			int res = locDao.addCorporateLocation(createdLoc);
+			if(res == 1) {
+				return 1;
+			} else {
+				return 0;
+			}
+		}catch(NumberFormatException e) {
+			return 0;
+		}
+	
+	}
 	
 	//Curate Location - Need Validation to ensure admin is sending this mapping
 	@CrossOrigin
