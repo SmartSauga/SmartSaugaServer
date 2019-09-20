@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class CityLocations extends Locations {
+public class CityLocations  {
 	
 	public String maintenanceMessage;
 	private boolean status;
@@ -23,7 +23,7 @@ public class CityLocations extends Locations {
 	public CityLocations(int locationId, String name, String address, int locUserRating, int locNumRaters, int wifiRating,
 			String type, String locationImageFile, double longitude, double latitude) {
 		
-		super(locationId, name, address, locUserRating, locNumRaters, wifiRating, type, locationImageFile, longitude, latitude);
+		//super(locationId, name, address, locUserRating, locNumRaters, wifiRating, type, locationImageFile, longitude, latitude);
 		this.status = true;
 		this.uniqueUsers = new ArrayList<Integer>();
 		this.userCount = 0;
