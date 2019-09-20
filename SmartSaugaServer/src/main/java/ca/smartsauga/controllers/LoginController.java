@@ -91,7 +91,7 @@ public class LoginController {
 	}
 	
 	@CrossOrigin
-	@RequestMapping(value = "/returnValidateUser/{email}}", method = RequestMethod.POST)
+	@RequestMapping(value = "/returnValidateUser/{email}", method = RequestMethod.POST)
 	public CitizenUser getValidatedUserForFront(@PathVariable String email) {
 		CitizenUser user = dao.getValidatedUser(email);
 		return user;
