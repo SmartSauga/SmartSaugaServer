@@ -124,8 +124,8 @@ public class LoginController {
 	@RequestMapping(value = "/GetLocations", method = RequestMethod.GET)
 	public List<Locations> getLocations() {
 		
-		List<Locations>locationList = dao.getAllLocations();
-		return  locationList;
+		return dao.getAllLocations();
+		
 	}
 	
 	@CrossOrigin
@@ -151,10 +151,10 @@ public class LoginController {
 			int numLocRating = Integer.parseInt(locRating);
 			int numWifiRating = Integer.parseInt(wifiRating);
 			LocationType locType = LocationType.toType(category);
-			//LocationStatus status = LocationStatus.PENDINGAPPROVAL;
+			LocationStatus status = LocationStatus.PENDINGAPPROVAL;
 		
-			Locations proposedLocation = new Locations(name, address, numLongitude, numLatitude, numLocRating, 
-					numWifiRating, LocationType.locTypeToString(locType), photo );
+			Locations proposedLocation = new CorporateLocation(name, address, numLongitude, numLatitude, numLocRating, 
+					numWifiRating, LocationType.locTypeToString(locType), photo, LocationStatus.getStatus(status) );
 			int locAdded = locDao.addCorporateLocation(proposedLocation);
 			if(locAdded == 1) {
 				return 1;
@@ -180,8 +180,8 @@ public class LoginController {
 			int numWifiRating = Integer.parseInt(wifiRating);
 			LocationType locType = LocationType.toType(category);
 			
-			Locations  createdLoc = new Locations(name, address, numLongitude, numLatitude, numLocRating, 
-					numWifiRating, photo, category);
+			Locations  createdLoc = new CorporateLocation(name, address, numLongitude, numLatitude, numLocRating, 
+					numWifiRating, photo, category, "City Approved");
 //			createdLoc.setLocStatus(LocationStatus.CITYAPPROVED);
 			int res = locDao.addCorporateLocation(createdLoc);
 			if(res == 1) {
@@ -229,34 +229,34 @@ public class LoginController {
 		
 		}
 	
-//	@CrossOrigin
-//	@RequestMapping(value = "/ChangeLocInfo/{locid}/{name}/{address}/{password}/{photo}/{wifiRating}/{locRating}/{category}/{comment}/{longitude}/{latitude}/{status}", 
-//	method = RequestMethod.POST)
-//	public int changeLocationInformation(@PathVariable int locid, @PathVariable String name, @PathVariable String password, @PathVariable String photo, @PathVariable String wifiRating,
-//			@PathVariable String locRating, @PathVariable String category, @PathVariable String comment, 
-//			@PathVariable String longitude, @PathVariable String latitude, @PathVariable String address, @PathVariable String status) {
-//		try {
-//			double numLongitude = Double.parseDouble(longitude);
-//			double numLatitude = Double.parseDouble(latitude);
-//			int numLocRating = Integer.parseInt(locRating);
-//			int numWifiRating = Integer.parseInt(wifiRating);
-//			LocationType locType = LocationType.toType(category);
-//			LocationStatus locStatus = LocationStatus.toStatus(status);
-//			
-//			
-//			CorporateLocation changeLocInfo = new CorporateLocation(name, address, numLongitude, numLatitude, numLocRating, 
-//					numWifiRating,LocationType.locTypeToString(locType), photo, LocationStatus.getStatus(locStatus));
-//			changeLocInfo.setLocationId(locid);
-//			if(locDao.changeLocInfo(changeLocInfo) == 1) {
-//				return 1;
-//			} else {
-//				return 0;
-//			}
-//		}catch(NumberFormatException e) {
-//			return 1;
-//		}
-//	
-//	}
+	@CrossOrigin
+	@RequestMapping(value = "/ChangeLocInfo/{locid}/{name}/{address}/{password}/{photo}/{wifiRating}/{locRating}/{category}/{comment}/{longitude}/{latitude}/{status}", 
+	method = RequestMethod.POST)
+	public int changeLocationInformation(@PathVariable int locid, @PathVariable String name, @PathVariable String password, @PathVariable String photo, @PathVariable String wifiRating,
+			@PathVariable String locRating, @PathVariable String category, @PathVariable String comment, 
+			@PathVariable String longitude, @PathVariable String latitude, @PathVariable String address, @PathVariable String status) {
+		try {
+			double numLongitude = Double.parseDouble(longitude);
+			double numLatitude = Double.parseDouble(latitude);
+			int numLocRating = Integer.parseInt(locRating);
+			int numWifiRating = Integer.parseInt(wifiRating);
+			LocationType locType = LocationType.toType(category);
+			LocationStatus locStatus = LocationStatus.toStatus(status);
+			
+			
+			CorporateLocation changeLocInfo = new CorporateLocation(name, address, numLongitude, numLatitude, numLocRating, 
+					numWifiRating,LocationType.locTypeToString(locType), photo, LocationStatus.getStatus(locStatus));
+			changeLocInfo.setLocationId(locid);
+			if(locDao.changeLocInfo(changeLocInfo) == 1) {
+				return 1;
+			} else {
+				return 0;
+			}
+		}catch(NumberFormatException e) {
+			return 1;
+		}
+	
+	}
 	
 	@CrossOrigin
 	@RequestMapping(value = "/blockUser/{email}", method = RequestMethod.POST)

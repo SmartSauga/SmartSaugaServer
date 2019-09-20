@@ -31,7 +31,7 @@ public class Dao {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		//get location  object for this one ======pending
-		Query query = session.createQuery("FROM Locations");
+		Query query = session.createQuery("from Locations");
 		List<Locations> locationList = (List<Locations>)query.getResultList();
 		session.getTransaction().commit();
 		session.close();

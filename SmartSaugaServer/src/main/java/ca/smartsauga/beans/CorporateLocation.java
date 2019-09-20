@@ -13,7 +13,8 @@ import lombok.NoArgsConstructor;
 @Data
 
 @Entity
-public class CorporateLocation  {
+
+public class CorporateLocation extends Locations {
 	
 	
 	
@@ -22,7 +23,7 @@ public class CorporateLocation  {
 
 	public CorporateLocation(String name, String address, double longitude, double latitude, int locUserRating,
 			int wifiRating, String locType, String fileImage, String locStatus) {
-		//super(name, address, longitude, latitude, locUserRating, wifiRating, locType, fileImage);
+		super(name, address, longitude, latitude, locUserRating, wifiRating, locType, fileImage);
 		
 		this.locStatus = locStatus;
 		// TODO Auto-generated constructor stub
