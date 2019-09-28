@@ -18,7 +18,7 @@ import ca.smartsauga.dao.Dao;
 import ca.smartsauga.dao.LocationDao;
 import ca.smartsauga.enums.LocationStatus;
 import ca.smartsauga.enums.LocationType;
-import ca.smartsauga.utilities.LocationList;
+
 import ca.smartsauga.utilities.PasswordController;
 
 @RestController
@@ -64,9 +64,9 @@ public class LoginController {
 	@CrossOrigin
 	@RequestMapping(value = "/genLocations", method = RequestMethod.GET)
 	public int genLocations() {
-		LocationList newLocations = new LocationList();
+//		LocationList newLocations = new LocationList();
 		List<Locations> locations = new ArrayList<Locations>();
-		locations = newLocations.locations();
+//		locations = newLocations.locations();
 		for(Locations l : locations) {
 			dao.addLocation(l);
 		}
