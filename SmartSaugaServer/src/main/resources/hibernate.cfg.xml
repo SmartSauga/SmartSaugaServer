@@ -31,8 +31,8 @@
 		<mapping class="ca.smartsauga.beans.User" />
 		<mapping class="ca.smartsauga.beans.CitizenUser" />
 		<mapping class="ca.smartsauga.beans.Locations" />
-		<mapping class="ca.smartsauga.beans.CityLocations" />
-		<mapping class="ca.smartsauga.beans.CorporateLocation" />
+		<!-- <mapping class="ca.smartsauga.beans.CityLocations" /> -->
+		<!-- <mapping class="ca.smartsauga.beans.CorporateLocation" /> -->
 
 
 	</session-factory>

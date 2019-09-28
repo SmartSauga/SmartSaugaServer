@@ -20,16 +20,17 @@ public class Locations {
 	@Column(name="location_address", nullable=false, length=150)
 	private String address;
 	
-	private int locUserRating;
+	@Column(name="location_rating")
+	private double locUserRating;
 	
-	private int locNumRaters;
+//	private int locNumRaters;
+	@Column(name="Wifi_rating")
+	private double wifiRating;
 	
-	private int wifiRating;
+	@Column(name="Category", nullable=false)
+	private String category;
 	
-	@NotNull(message="Type cannot be null")
-	private String locType;
-	
-	private String locationImageFile;
+//	private String locationImageFile;
 	
 	
 	@Column(nullable=false)
@@ -38,18 +39,20 @@ public class Locations {
 	@Column(nullable=false)
 	private double latitude;
 	
+	@Column(name="location_status")
+	private String status;
 	
-	public Locations(String name, String address, double longitude, double latitude, int locUserRating, int wifiRating,
-			String locType, String fileImage) {
+	public Locations(String name, String address, double longitude, double latitude, double locUserRating, double wifiRating,
+			String category, String status) {
 		this.name = name;
 		this.address = address;
 		this.longitude = longitude;
 		this.latitude = latitude;
 		this.locUserRating = locUserRating;
 		this.wifiRating  = wifiRating;
-		this.locType = locType;
-		this.locationImageFile = fileImage;
-		this.locNumRaters = 0;
+		this.category = category;
+		this.status = status;
+		
 	}
 
 	public Locations(String name, double longitude, double latitude) {
