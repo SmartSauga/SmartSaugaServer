@@ -59,10 +59,14 @@ public class LocationDao {
 			Session session = sessionFactory.openSession();
 			session.beginTransaction();
 			try {
-			session.save(location);
-			session.getTransaction().commit();
-			session.close();
-			return 1;
+			if(getLocation(location.getAddress()) == 0) {
+				session.save(location);
+				session.getTransaction().commit();
+				session.close();
+				return 1;
+			}else {
+				return 0;
+			}
 			}catch(Exception e) {
 				return 0;
 			}

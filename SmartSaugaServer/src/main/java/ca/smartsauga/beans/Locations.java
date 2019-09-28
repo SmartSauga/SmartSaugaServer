@@ -52,6 +52,7 @@ public class Locations {
 		this.wifiRating  = wifiRating;
 		this.category = category;
 		this.status = status;
+		this.internetSpeed = internetSpeed;
 		
 	}
 
