@@ -23,16 +23,13 @@ public class Locations {
 	@Column(name="location_rating")
 	private double locUserRating;
 	
-//	private int locNumRaters;
-	@Column(name="Wifi_rating")
+	@Column(name="wifi_rating")
 	private double wifiRating;
 	
-	@Column(name="Category", nullable=false)
+	@Column(name="category", nullable=false)
 	private String category;
 	
-//	private String locationImageFile;
-	
-	
+
 	@Column(nullable=false)
 	private double longitude;
 	
@@ -42,8 +39,11 @@ public class Locations {
 	@Column(name="location_status")
 	private String status;
 	
+	@Column(name="internet_speed", nullable=false)
+	private double internetSpeed;
+	
 	public Locations(String name, String address, double longitude, double latitude, double locUserRating, double wifiRating,
-			String category, String status) {
+			String category, String status, double internetSpeed) {
 		this.name = name;
 		this.address = address;
 		this.longitude = longitude;
@@ -55,11 +55,7 @@ public class Locations {
 		
 	}
 
-	public Locations(String name, double longitude, double latitude) {
-		this.name = name;
-		this.longitude = longitude;
-		this.latitude = latitude;
-	}
+	
 	
 	
 	

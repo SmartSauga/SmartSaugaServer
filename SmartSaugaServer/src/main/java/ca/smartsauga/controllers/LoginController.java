@@ -140,19 +140,19 @@ public class LoginController {
 	}
 	//1 successful and 0 unsuccessful
 	@CrossOrigin
-	@RequestMapping(value = "/ProposeLocation/{name}/{address}/{wifiRating}/{locRating}/{category}/{longitude}/{latitude}", 
+	@RequestMapping(value = "/ProposeLocation/{name}/{address}/{wifiRating}/{locRating}/{category}/{longitude}/{latitude}/{speed}", 
 	method = RequestMethod.POST)
 	public int proposeLocation(@PathVariable String name,@PathVariable String address, @PathVariable String wifiRating,
-			@PathVariable String locRating, @PathVariable String category, @PathVariable String longitude, @PathVariable String latitude) {
+			@PathVariable String locRating, @PathVariable String category, @PathVariable String longitude, @PathVariable String latitude, @PathVariable double speed) {
 		try {
 			double numLongitude = Double.parseDouble(longitude);
 			double numLatitude = Double.parseDouble(latitude);
 			double numLocRating = Integer.parseInt(locRating);
 			double numWifiRating = Integer.parseInt(wifiRating);
 			String status = "Pending";
-		
+			
 			Locations proposedLocation = new Locations(name, address, numLongitude, numLatitude, numLocRating, 
-					numWifiRating,category, status );
+					numWifiRating,category, status,speed );
 			int locAdded = locDao.addNewLocation(proposedLocation);
 			if(locAdded == 1) {
 				return 1;
@@ -166,11 +166,11 @@ public class LoginController {
 	}
 	
 	@CrossOrigin
-	@RequestMapping(value = "/ADMINCreateLocation/{name}/{address}/{wifiRating}/{locRating}/{category}/{longitude}/{latitude}", 
+	@RequestMapping(value = "/ADMINCreateLocation/{name}/{address}/{wifiRating}/{locRating}/{category}/{longitude}/{latitude}/{speed}", 
 	method = RequestMethod.POST)
 	public int adminCreateLocation(@PathVariable String name, @PathVariable String wifiRating,
 			@PathVariable String locRating, @PathVariable String category, 
-			@PathVariable String longitude, @PathVariable String latitude, @PathVariable String address) {
+			@PathVariable String longitude, @PathVariable String latitude, @PathVariable String address, @PathVariable double speed) {
 		try {
 			double numLongitude = Double.parseDouble(longitude);
 			double numLatitude = Double.parseDouble(latitude);
@@ -179,7 +179,7 @@ public class LoginController {
 			LocationType locType = LocationType.toType(category);
 			
 			Locations  createdLoc = new Locations(name, address, numLongitude, numLatitude, numLocRating, 
-					numWifiRating,category, "Approved" );
+					numWifiRating,category,"Approved",speed );
 //			
 			int res = locDao.addNewLocation(createdLoc);
 			if(res == 1) {
