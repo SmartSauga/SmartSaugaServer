@@ -41,7 +41,7 @@ public class Locations {
 	
 	@Column(name="internet_speed", nullable=false)
 	private double internetSpeed;
-	
+	//
 	public Locations(String name, String address, double longitude, double latitude, double locUserRating, double wifiRating,
 			String category, String status, double internetSpeed) {
 		this.name = name;

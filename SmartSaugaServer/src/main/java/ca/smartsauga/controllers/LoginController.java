@@ -164,6 +164,7 @@ public class LoginController {
 		}
 	
 	}
+	//
 	
 	@CrossOrigin
 	@RequestMapping(value = "/ADMINCreateLocation/{name}/{address}/{wifiRating}/{locRating}/{category}/{longitude}/{latitude}/{speed}", 
