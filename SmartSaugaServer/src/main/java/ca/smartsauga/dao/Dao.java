@@ -50,22 +50,25 @@ public class Dao {
 		return locationDList;
 	}
 	
-	public List<User> getUserDataForAdmin(){
-		List<User> dataForAdmin = null;
+	public List<CitizenUser> getUserDataForAdmin(){
+		List<CitizenUser> dataForAdmin = null;
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		//get location  object for this one ======pending
 		Query query = session.createQuery("from User");
 		List<CitizenUser> userList = (List<CitizenUser>)query.getResultList();
-		
-		for(int i=0; i<userList.size(); i++) {
-			User user = new CitizenUser(userList.get(i).getUserId(), userList.get(i).getFirstname(), userList.get(i).getLastname(),
+		List<User> uList = (List<User>)query.getResultList();
+	
+			for(int i=0; i<userList.size(); i++) {
+				CitizenUser user = new CitizenUser(userList.get(i).getUserId(), userList.get(i).getFirstname(), userList.get(i).getLastname(),
 					userList.get(i).getEmail(), userList.get(i).getUserBirthdate(), userList.get(i).getType(), userList.get(i).getStatus());
-			dataForAdmin.add(user);
-		}
-		session.getTransaction().commit();
-		session.close();
-		return dataForAdmin;
+				dataForAdmin.add(user);
+				
+				session.getTransaction().commit();
+				session.close();
+			}
+				return dataForAdmin;
+			
 	}
 	
 	public String validateUser(String email) {
