@@ -50,26 +50,36 @@ public class Dao {
 		return locationDList;
 	}
 	
-	public List<CitizenUser> getUserDataForAdmin(){
-		List<CitizenUser> dataForAdmin = null;
+	public List<CitizenUser> getAllUsers(){
+		
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		//get location  object for this one ======pending
 		Query query = session.createQuery("from User");
 		List<CitizenUser> userList = (List<CitizenUser>)query.getResultList();
-		List<User> uList = (List<User>)query.getResultList();
-	
-			for(int i=0; i<userList.size(); i++) {
-				CitizenUser user = new CitizenUser(userList.get(i).getUserId(), userList.get(i).getFirstname(), userList.get(i).getLastname(),
-					userList.get(i).getEmail(), userList.get(i).getUserBirthdate(), userList.get(i).getType(), userList.get(i).getStatus());
-				dataForAdmin.add(user);
-				
-				session.getTransaction().commit();
-				session.close();
-			}
-				return dataForAdmin;
+		session.getTransaction().commit();
+		session.close();
+		try {
+			return userList;
+		}catch(NullPointerException e) {
+			return userList;
+		}
 			
 	}
+	// user data for admin
+	public List<CitizenUser> userDataForAdmin(){
+		List<CitizenUser> exList = getAllUsers();
+		List<CitizenUser> cuList = null;
+		for(int i=0; i< exList.size(); i++) {
+			CitizenUser cu = new CitizenUser(exList.get(i).getUserId(), exList.get(i).getFirstname(),
+					exList.get(i).getLastname(), exList.get(i).getEmail(), 
+					exList.get(i).getUserBirthdate(), exList.get(i).getType(), exList.get(i).getStatus());
+			cuList.add(cu);
+			
+		}
+		return cuList;
+	}
+	
 	
 	public String validateUser(String email) {
 		return "password string";

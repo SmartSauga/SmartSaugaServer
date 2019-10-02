@@ -133,11 +133,11 @@ public class LoginController {
 	public List<LocationDataStatus> getLocationDataStatusList(){
 		return dao.getAllLocationsData();
 	}
-	
+	// this will get user  data for admin without the password
 	@CrossOrigin
 	@RequestMapping(value = "/GetUserData", method = RequestMethod.GET)
 	public List<CitizenUser> userDataForAdmin(){
-		return dao.getUserDataForAdmin();
+		return dao.userDataForAdmin();
 	}
 	
 	@CrossOrigin
