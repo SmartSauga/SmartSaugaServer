@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import ca.smartsauga.beans.CitizenUser;
+import ca.smartsauga.beans.LocationDataStatus;
 import ca.smartsauga.beans.Locations;
 import ca.smartsauga.beans.User;
 import ca.smartsauga.utilities.PasswordController;
@@ -36,6 +37,17 @@ public class Dao {
 		session.getTransaction().commit();
 		session.close();
 		return locationList;
+	}
+	
+	public List<LocationDataStatus> getAllLocationsData(){
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		//get location  object for this one ======pending
+		Query query = session.createQuery("from LocationDataStatus");
+		List<LocationDataStatus> locationDList = (List<LocationDataStatus>)query.getResultList();
+		session.getTransaction().commit();
+		session.close();
+		return locationDList;
 	}
 	
 	public String validateUser(String email) {

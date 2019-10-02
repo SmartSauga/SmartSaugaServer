@@ -129,6 +129,12 @@ public class LoginController {
 	}
 	
 	@CrossOrigin
+	@RequestMapping(value = "/GetLocationData", method = RequestMethod.GET)
+	public List<LocationDataStatus> getLocationDataStatusList(){
+		return dao.getAllLocationsData();
+	}
+	
+	@CrossOrigin
 	@RequestMapping(value = "/DeleteUser/{email}", method = RequestMethod.DELETE)
 	public int deleteUser(@PathVariable String email) {
 		
