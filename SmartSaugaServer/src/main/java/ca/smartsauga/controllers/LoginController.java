@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ca.smartsauga.beans.CitizenUser;
-
+import ca.smartsauga.beans.LocationDataStatus;
 import ca.smartsauga.beans.Locations;
 import ca.smartsauga.beans.User;
 import ca.smartsauga.dao.Dao;
@@ -138,53 +138,68 @@ public class LoginController {
 		return 0;
 		
 	}
-	//1 successful and 0 unsuccessful
-	@CrossOrigin
-	@RequestMapping(value = "/ProposeLocation/{name}/{address}/{wifiRating}/{locRating}/{category}/{longitude}/{latitude}/{speed}", 
-	method = RequestMethod.POST)
-	public int proposeLocation(@PathVariable String name,@PathVariable String address, @PathVariable String wifiRating,
-			@PathVariable String locRating, @PathVariable String category, @PathVariable String longitude, @PathVariable String latitude, @PathVariable double speed) {
-		try {
-			double numLongitude = Double.parseDouble(longitude);
-			double numLatitude = Double.parseDouble(latitude);
-			double numLocRating = Integer.parseInt(locRating);
-			double numWifiRating = Integer.parseInt(wifiRating);
-			String status = "Pending";
-			
-			Locations proposedLocation = new Locations(name, address, numLongitude, numLatitude, numLocRating, 
-					numWifiRating,category, status,speed );
-			int locAdded = locDao.addNewLocation(proposedLocation);
-			if(locAdded == 1) {
-				return 1;
-			} else {
-				return 0;
-			}
-		}catch(NumberFormatException e) {
-			return 0;
-		}
-	
-	}
+//	//1 successful and 0 unsuccessful
+//	@CrossOrigin
+//	@RequestMapping(value = "/ProposeLocation/{name}/{address}/{wifiRating}/{locRating}/{category}/{longitude}/{latitude}/{speed}", 
+//	method = RequestMethod.POST)
+//	public int proposeLocation(@PathVariable String name,@PathVariable String address, @PathVariable String wifiRating,
+//			@PathVariable String locRating, @PathVariable String category, @PathVariable String longitude, @PathVariable String latitude, @PathVariable double speed) {
+//		try {
+//			double numLongitude = Double.parseDouble(longitude);
+//			double numLatitude = Double.parseDouble(latitude);
+//			double numLocRating = Integer.parseInt(locRating);
+//			double numWifiRating = Integer.parseInt(wifiRating);
+//			String status = "Pending";
+//			
+//			Locations proposedLocation = new Locations(name, address, numLongitude, numLatitude, numLocRating, 
+//					numWifiRating,category, status,speed );
+//			int locAdded = locDao.addNewLocation(proposedLocation);
+//			if(locAdded == 1) {
+//				return 1;
+//			} else {
+//				return 0;
+//			}
+//		}catch(NumberFormatException e) {
+//			return 0;
+//		}
+//	
+//	}
 	//
 	
 	@CrossOrigin
-	@RequestMapping(value = "/ADMINCreateLocation/{name}/{address}/{wifiRating}/{locRating}/{category}/{longitude}/{latitude}/{speed}", 
+	@RequestMapping(value = "/ADMINCreateLocation/{name}/{address}/{wifiRating}/{locRating}/{category}/{longitude}/{latitude}/{ipAddress}/{macAddress}/{description}/{downloadSpeed}/{uploadSpeed}/{ping}/{status}", 
 	method = RequestMethod.POST)
-	public int adminCreateLocation(@PathVariable String name, @PathVariable String wifiRating,
-			@PathVariable String locRating, @PathVariable String category, 
-			@PathVariable String longitude, @PathVariable String latitude, @PathVariable String address, @PathVariable double speed) {
+	public int adminCreateLocation(@PathVariable String name,@PathVariable String address, 
+			@PathVariable String wifiRating, @PathVariable String locRating, @PathVariable String category, 
+			@PathVariable String longitude, @PathVariable String latitude, @PathVariable String ipAddress, 
+			@PathVariable String macAddress,@PathVariable String description, @PathVariable String downloadSpeed, 
+			@PathVariable String uploadSpeed, @PathVariable String ping,  @PathVariable String status) {
 		try {
 			double numLongitude = Double.parseDouble(longitude);
 			double numLatitude = Double.parseDouble(latitude);
 			double numLocRating = Integer.parseInt(locRating);
 			double numWifiRating = Integer.parseInt(wifiRating);
-			LocationType locType = LocationType.toType(category);
+			
 			
 			Locations  createdLoc = new Locations(name, address, numLongitude, numLatitude, numLocRating, 
-					numWifiRating,category,"Approved",speed );
+					numWifiRating,category);
 //			
-			int res = locDao.addNewLocation(createdLoc);
-			if(res == 1) {
-				return 1;
+			int res1 = locDao.addNewLocation(createdLoc);
+			
+			int loId = locDao.getLocationIdForStatus(createdLoc);
+			
+			String loName = locDao.getLocationNameForStatus(createdLoc);
+			
+			String loAdd = locDao.getLocationAddressForStatus(createdLoc);
+			
+			LocationDataStatus ls = new LocationDataStatus(loId,loName,loAdd,ipAddress, macAddress,description,downloadSpeed,uploadSpeed,ping,status);
+			if(res1 == 1) {
+				int res2 = locDao.addNewLocationStatus(ls);
+				if(res2 == 1) {
+					return 1;
+				}else {
+					return 0;
+				}
 			} else {
 				return 0;
 			}

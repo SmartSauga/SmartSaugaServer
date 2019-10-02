@@ -9,7 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import ca.smartsauga.beans.CitizenUser;
-
+import ca.smartsauga.beans.LocationDataStatus;
 import ca.smartsauga.beans.Locations;
 import ca.smartsauga.enums.LocationStatus;
 import ca.smartsauga.enums.LocationType;
@@ -143,6 +143,51 @@ public class LocationDao {
 //		return 0;
 //	}
 	
+	public int getLocationIdForStatus(Locations location) {
+		int id = 0;
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("from Locations");
+		List<Locations> locationList = (List<Locations>) query.getResultList();
+			id = locationList.get(0).getLocationId();
+			return id;			
 	
+	}
+	
+	public String getLocationNameForStatus(Locations location) {
+		String locName = null;
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("from Locations");
+		List<Locations> locationList = (List<Locations>) query.getResultList();
+			locName = locationList.get(0).getName();
+			return locName;			
+	
+	}
+	public String getLocationAddressForStatus(Locations location) {
+		String locAddress = null;
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("from Locations");
+		List<Locations> locationList = (List<Locations>) query.getResultList();
+			locAddress = locationList.get(0).getAddress();
+			return locAddress;			
+	
+	}
+	
+	public int addNewLocationStatus(LocationDataStatus locStatus) {
+		
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		try {
+		session.save(locStatus);
+		session.getTransaction().commit();
+		session.close();
+		return 1;
+		}catch(Exception e) {
+			return 0;
+		}
+		
+	}
 
 }
