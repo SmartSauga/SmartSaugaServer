@@ -135,6 +135,12 @@ public class LoginController {
 	}
 	
 	@CrossOrigin
+	@RequestMapping(value = "/GetUserData", method = RequestMethod.POST)
+	public List<User> userDataForAdmin(){
+		return dao.getUserDataForAdmin();
+	}
+	
+	@CrossOrigin
 	@RequestMapping(value = "/DeleteUser/{email}", method = RequestMethod.DELETE)
 	public int deleteUser(@PathVariable String email) {
 		

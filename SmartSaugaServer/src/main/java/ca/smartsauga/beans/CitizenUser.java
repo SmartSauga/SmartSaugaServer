@@ -30,5 +30,10 @@ public class CitizenUser extends User {
 	}
 	
 	
+	public CitizenUser(int id, String firstname, String lastname, String email, String userBirthdate, String type, String status) {
+		this.userBirthdate = userBirthdate;
+		this.status = status;
+	}
+	
 	
 }
