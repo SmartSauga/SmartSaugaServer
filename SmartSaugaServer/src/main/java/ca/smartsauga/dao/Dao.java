@@ -57,13 +57,14 @@ public class Dao {
 		//get location  object for this one ======pending
 		Query query = session.createQuery("from User");
 		List<CitizenUser> userList = (List<CitizenUser>)query.getResultList();
-		session.getTransaction().commit();
-		session.close();
+		
 		for(int i=0; i<userList.size(); i++) {
 			User user = new CitizenUser(userList.get(i).getUserId(), userList.get(i).getFirstname(), userList.get(i).getLastname(),
 					userList.get(i).getEmail(), userList.get(i).getUserBirthdate(), userList.get(i).getType(), userList.get(i).getStatus());
 			dataForAdmin.add(user);
 		}
+		session.getTransaction().commit();
+		session.close();
 		return dataForAdmin;
 	}
 	
