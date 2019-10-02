@@ -136,8 +136,8 @@ public class LoginController {
 	// this will get user  data for admin without the password
 	@CrossOrigin
 	@RequestMapping(value = "/GetUserData", method = RequestMethod.GET)
-	public List<CitizenUser> userDataForAdmin(){
-		return dao.getAllUsers();
+	public List<User> userDataForAdmin(){
+		return dao.userDataForAdmin();
 	}
 	
 	@CrossOrigin

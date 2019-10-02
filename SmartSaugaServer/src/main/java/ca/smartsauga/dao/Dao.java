@@ -49,7 +49,7 @@ public class Dao {
 		session.close();
 		return locationDList;
 	}
-	
+	// returns all citizen users in the database
 	public List<CitizenUser> getAllUsers(){
 		
 		Session session = sessionFactory.openSession();
@@ -67,15 +67,14 @@ public class Dao {
 			
 	}
 	// user data for admin
-	public List<CitizenUser> userDataForAdmin(){
+	public List<User> userDataForAdmin(){
 		List<CitizenUser> exList = getAllUsers();
-		List<CitizenUser> cuList = null;
+		List<User> cuList = null;
 		for(int i=0; i< exList.size(); i++) {
-			CitizenUser cu = new CitizenUser(exList.get(i).getUserId(), exList.get(i).getFirstname(),
+			User cu = new CitizenUser(exList.get(i).getUserId(), exList.get(i).getFirstname(),
 					exList.get(i).getLastname(), exList.get(i).getEmail(), 
 					exList.get(i).getUserBirthdate(), exList.get(i).getType(), exList.get(i).getStatus());
 			cuList.add(cu);
-			
 		}
 		return cuList;
 	}
