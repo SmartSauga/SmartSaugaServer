@@ -137,7 +137,7 @@ public class LoginController {
 	@CrossOrigin
 	@RequestMapping(value = "/GetUserData", method = RequestMethod.GET)
 	public List<CitizenUser> userDataForAdmin(){
-		return dao.userDataForAdmin();
+		return dao.getAllUsers();
 	}
 	
 	@CrossOrigin
