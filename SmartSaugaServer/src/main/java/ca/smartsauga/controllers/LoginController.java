@@ -50,8 +50,9 @@ public class LoginController {
 	@RequestMapping(value = "/adminLogin/{email}/{password}", method = RequestMethod.POST)
 	public boolean adminLogin(@PathVariable String email, @PathVariable String password) {
 		if(dao.getValidatedAdminUser(email) != null) {
-			if(passwordController.encrypt(password).contentEquals(dao.getValidatedAdminUser(email).getPassword())) {
-				System.out.println(dao.getValidatedUser(email).getEmail());
+			if(passwordController.encrypt(password).contentEquals((dao.getValidatedAdminUser(email)).getPassword())) {
+				System.out.println(dao.getValidatedAdminUser(email).getEmail());
+				System.out.println(dao.getValidatedAdminUser(email).getPassword());
 				return true;
 			}else {
 				return false;
@@ -274,34 +275,18 @@ public class LoginController {
 		
 		}
 	
-//	@CrossOrigin
-//	@RequestMapping(value = "/ChangeLocInfo/{locid}/{name}/{address}/{password}/{photo}/{wifiRating}/{locRating}/{category}/{comment}/{longitude}/{latitude}/{status}", 
-//	method = RequestMethod.POST)
-//	public int changeLocationInformation(@PathVariable int locid, @PathVariable String name, @PathVariable String password, @PathVariable String photo, @PathVariable String wifiRating,
-//			@PathVariable String locRating, @PathVariable String category, @PathVariable String comment, 
-//			@PathVariable String longitude, @PathVariable String latitude, @PathVariable String address, @PathVariable String status) {
-//		try {
-//			double numLongitude = Double.parseDouble(longitude);
-//			double numLatitude = Double.parseDouble(latitude);
-//			int numLocRating = Integer.parseInt(locRating);
-//			int numWifiRating = Integer.parseInt(wifiRating);
-//			LocationType locType = LocationType.toType(category);
-//			LocationStatus locStatus = LocationStatus.toStatus(status);
-//			
-//			
-//			CorporateLocation changeLocInfo = new CorporateLocation(name, address, numLongitude, numLatitude, numLocRating, 
-//					numWifiRating,LocationType.locTypeToString(locType), photo, LocationStatus.getStatus(locStatus));
-//			changeLocInfo.setLocationId(locid);
-//			if(locDao.changeLocInfo(changeLocInfo) == 1) {
-//				return 1;
-//			} else {
-//				return 0;
-//			}
-//		}catch(NumberFormatException e) {
-//			return 1;
-//		}
-//	
-//	}
+		//update location
+	@CrossOrigin
+	@RequestMapping(value = "/updateLocationInfo/{id}/{name}/{address}/{category}", 
+	method = RequestMethod.POST)
+	public void changeLocationInformation(@PathVariable int id, @PathVariable String name, @PathVariable String address, @PathVariable String category) {
+		
+			
+			locDao.updateLocation(id, name, address, category);
+			
+		
+	
+	}
 	
 	@CrossOrigin
 	@RequestMapping(value = "/blockUser/{email}", method = RequestMethod.POST)
@@ -325,6 +310,15 @@ public class LoginController {
 		}else {
 			return 2;
 		}
+	}
+	
+	//This method returns a location information based on the locationId.
+	@CrossOrigin
+	@RequestMapping(value = "/getLocId/{id}", method = RequestMethod.GET)
+	public Locations getLocationFromLocId(@PathVariable int id) {
+		
+		return locDao.getLocationDataFromId(id);
+		
 	}
 	
 }

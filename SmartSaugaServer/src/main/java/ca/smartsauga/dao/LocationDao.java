@@ -123,25 +123,30 @@ public class LocationDao {
 //		return 0;
 //	}
 	
-//	public int changeLocInfo(Locations corpLocation) {
-//		Session session = sessionFactory.openSession();
-//		session.beginTransaction();
-//		
-//		Locations modLoc = (Locations) session.get(Locations.class, corpLocation.getLocationId());
-//		modLoc.setAddress(corpLocation.getAddress());
-//		modLoc.setLatitude(corpLocation.getLatitude());
-//		modLoc.setLongitude(corpLocation.getLongitude());
-//		modLoc.setLocationImageFile(corpLocation.getLocationImageFile());
-//		//modLoc.setLocStatus(corpLocation.getLocStatus());
-//		modLoc.setName(corpLocation.getName());
-//		modLoc.setLocType(corpLocation.getLocType());
-//		
-//		session.getTransaction().commit();
-//		session.close();
-//		
-//		
-//		return 0;
-//	}
+	public int updateLocation(int id, String name, String address, String category) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		
+		Query query1 = session.createQuery("Update Locations set address=:address where locationId=:locationId");
+		query1.setParameter("address",address);
+		query1.setParameter("locationId",id);
+		query1.executeUpdate();
+		Query query2 = session.createQuery("Update Locations set name=:name where locationId=:locationId");
+		query2.setParameter("name",name);
+		query2.setParameter("locationId",id);
+		query2.executeUpdate();
+		Query query3 = session.createQuery("Update Locations set category=:category where locationId=:locationId");
+		query3.setParameter("category", category);
+		query3.setParameter("locationId",id);
+		
+		query3.executeUpdate();
+		
+		session.getTransaction().commit();
+		session.close();
+		
+		
+		return 0;
+	}
 	
 	public int getLocationIdForStatus(String name) {
 		int id = 0;
@@ -151,6 +156,8 @@ public class LocationDao {
 		query.setParameter("name", name);
 		List<Locations> locationList = (List<Locations>) query.getResultList();
 			id = locationList.get(0).getLocationId();
+			session.getTransaction().commit();
+			session.close();
 			return id;			
 	
 	}
@@ -162,6 +169,8 @@ public class LocationDao {
 		Query query = session.createQuery("from Locations");
 		List<Locations> locationList = (List<Locations>) query.getResultList();
 			locName = locationList.get(0).getName();
+			session.getTransaction().commit();
+			session.close();
 			return locName;			
 	
 	}
@@ -172,6 +181,8 @@ public class LocationDao {
 		Query query = session.createQuery("from Locations");
 		List<Locations> locationList = (List<Locations>) query.getResultList();
 			locAddress = locationList.get(0).getAddress();
+			session.getTransaction().commit();
+			session.close();
 			return locAddress;			
 	
 	}
@@ -189,6 +200,19 @@ public class LocationDao {
 			return 0;
 		}
 		
+	}
+	
+	public Locations getLocationDataFromId(int id) {
+		Locations loc;
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("from Locations where id =:id");
+		query.setParameter("id", id);
+		List<Locations> locationList = (List<Locations>) query.getResultList();
+			loc = locationList.get(0);
+			session.getTransaction().commit();
+			session.close();
+			return loc;	
 	}
 
 }

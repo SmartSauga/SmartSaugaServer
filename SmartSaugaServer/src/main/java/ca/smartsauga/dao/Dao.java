@@ -116,9 +116,9 @@ public class Dao {
 		try {
 			if(userList.size() == 1) {
 				user = userList.get(0);
+				session.getTransaction().commit();
+				session.close();
 				if(user.getType() == "Admin") {
-					session.getTransaction().commit();
-					session.close();
 					return user;
 				}else {
 					return null;
