@@ -118,6 +118,7 @@ public class Dao {
 	}
 	
 	
+	
 	//returns email for checking if user exists
 	public String getUnvalidatedUser(String email) {
 		CitizenUser citizenUser;

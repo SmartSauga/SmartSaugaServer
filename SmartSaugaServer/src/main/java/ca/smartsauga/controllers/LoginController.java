@@ -46,6 +46,15 @@ public class LoginController {
 		
 	}
 	
+	//To be changed later
+	@CrossOrigin
+	@RequestMapping(value = "/createAdmin/{firstname}/{lastname}/{email}/{password}/{type}", method = RequestMethod.POST)
+	public void registerAdminUser(@PathVariable String firstname, @PathVariable String lastname, @PathVariable String email, @PathVariable String password ) {
+		User user = new User(firstname,lastname,email,password,"Admin");
+		dao.registerCitizenUser(user);
+		
+	}
+	
 	@CrossOrigin
 	@RequestMapping(value = "/updateProfile/{email}/{firstname}/{lastname}/{birthdate}", method = RequestMethod.POST)
 	public CitizenUser updateProfile(@PathVariable String email, @PathVariable String firstname, @PathVariable String lastname, @PathVariable String birthdate) {
@@ -176,7 +185,7 @@ public class LoginController {
 //		}
 //	
 //	}
-	//
+//
 	
 	@CrossOrigin
 	@RequestMapping(value = "/ADMINCreateLocation/{name}/{address}/{wifiRating}/{locRating}/{category}/{longitude}/{latitude}/{ipAddress}/{macAddress}/{description}/{downloadSpeed}/{uploadSpeed}/{ping}/{status}", 

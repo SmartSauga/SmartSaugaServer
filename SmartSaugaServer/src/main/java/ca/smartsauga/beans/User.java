@@ -22,7 +22,6 @@ public class User {
 	@GeneratedValue
 	private int userId;
 	
-	
 	@NotNull(message="Name cannot be empty")
 	@Column(length = 40)
 	private String firstname;
@@ -35,14 +34,11 @@ public class User {
 	@Pattern(regexp="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", message="Email must be valid")
 	private String email;
 	
-	
 	@NotNull(message="Password cannot be empty")
 	private String password;
 	
 	@NotNull(message="Type cannot be null")
 	private String type;
-	
-	
 	
 	public User(String email, String password, String firstname, String lastname, String type) {
 		this.email = email;
