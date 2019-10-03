@@ -46,6 +46,21 @@ public class LoginController {
 		
 	}
 	
+	@CrossOrigin
+	@RequestMapping(value = "/adminLogin/{email}/{password}", method = RequestMethod.POST)
+	public boolean adminLogin(@PathVariable String email, @PathVariable String password) {
+		if(dao.getValidatedAdminUser(email) != null) {
+			if(passwordController.encrypt(password).contentEquals(dao.getValidatedAdminUser(email).getPassword())) {
+				System.out.println(dao.getValidatedUser(email).getEmail());
+				return true;
+			}else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+	
 	//To be changed later
 	@CrossOrigin
 	@RequestMapping(value = "/createAdmin/{firstname}/{lastname}/{email}/{password}/{type}", method = RequestMethod.POST)

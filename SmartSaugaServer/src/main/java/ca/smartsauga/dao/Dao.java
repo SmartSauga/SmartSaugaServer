@@ -106,6 +106,32 @@ public class Dao {
 		
 		
 	}
+	public CitizenUser getValidatedAdminUser(String email){
+		CitizenUser user = null;
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("from User WHERE email =:email");
+		query.setParameter("email", email);
+		List<CitizenUser> userList = (List<CitizenUser>) query.getResultList();
+		try {
+			if(userList.size() == 1) {
+				user = userList.get(0);
+				if(user.getType() == "Admin") {
+					session.getTransaction().commit();
+					session.close();
+					return user;
+				}else {
+					return null;
+				}
+			}else {
+				return null;
+			}
+		}catch(NullPointerException e) {
+			return null;
+		}
+		
+		
+	}
 	
 	public void registerCitizenUser(User user) {
 		Session session = sessionFactory.openSession();
