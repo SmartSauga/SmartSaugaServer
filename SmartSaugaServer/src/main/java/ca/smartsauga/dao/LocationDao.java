@@ -143,11 +143,12 @@ public class LocationDao {
 //		return 0;
 //	}
 	
-	public int getLocationIdForStatus(Locations location) {
+	public int getLocationIdForStatus(String name) {
 		int id = 0;
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		Query query = session.createQuery("from Locations");
+		Query query = session.createQuery("from Locations WHERE name =:name");
+		query.setParameter("name", name);
 		List<Locations> locationList = (List<Locations>) query.getResultList();
 			id = locationList.get(0).getLocationId();
 			return id;			

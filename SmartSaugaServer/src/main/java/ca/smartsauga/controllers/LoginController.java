@@ -198,14 +198,9 @@ public class LoginController {
 //			
 			int res1 = locDao.addNewLocation(createdLoc);
 			
-			int loId = locDao.getLocationIdForStatus(createdLoc);
-			
-			String loName = locDao.getLocationNameForStatus(createdLoc);
-			
-			String loAdd = locDao.getLocationAddressForStatus(createdLoc);
-			
-			LocationDataStatus ls = new LocationDataStatus(loId,loName,loAdd,ipAddress, macAddress,description,downloadSpeed,uploadSpeed,ping,status);
 			if(res1 == 1) {
+				int loId = locDao.getLocationIdForStatus(name);
+				LocationDataStatus ls = new LocationDataStatus(loId,name,address,ipAddress, macAddress,description,downloadSpeed,uploadSpeed,ping,status);
 				int res2 = locDao.addNewLocationStatus(ls);
 				if(res2 == 1) {
 					return 1;
