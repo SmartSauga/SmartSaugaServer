@@ -131,15 +131,33 @@ public class LocationDao {
 		query1.setParameter("address",address);
 		query1.setParameter("locationId",id);
 		query1.executeUpdate();
-		Query query2 = session.createQuery("Update Locations set name=:name where locationId=:locationId");
-		query2.setParameter("name",name);
-		query2.setParameter("locationId",id);
-		query2.executeUpdate();
+		
+		Query query5 = session.createQuery("Update Locations set name=:name where locationId=:locationId");
+		query5.setParameter("name",name);
+		query5.setParameter("locationId",id);
+		query5.executeUpdate();
+		
 		Query query3 = session.createQuery("Update Locations set category=:category where locationId=:locationId");
 		query3.setParameter("category", category);
 		query3.setParameter("locationId",id);
-		
 		query3.executeUpdate();
+		
+		Query query2 = session.createQuery("Update LocationDataStatus set name=:name where locationId=:locationId");
+		query2.setParameter("name",name);
+		query2.setParameter("locationId",id);
+		query2.executeUpdate();
+		
+		
+		
+		Query query4 = session.createQuery("Update LocationDataStatus set address=:address where locationId=:locationId");
+		query4.setParameter("address",address);
+		query4.setParameter("locationId",id);
+		query4.executeUpdate();
+		
+		
+		
+		
+		
 		
 		session.getTransaction().commit();
 		session.close();
