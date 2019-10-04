@@ -87,6 +87,38 @@ public class LoginController {
 	}
 	
 	@CrossOrigin
+	@RequestMapping(value = "/updateProfile/{email}/{type}/{status}", method = RequestMethod.POST)
+	public CitizenUser updateUserProfileByAdmin(@PathVariable String email, @PathVariable String type, @PathVariable String status) {
+		
+		
+		return dao.updateUserByAdmin(email, type, status);
+		
+	
+		
+		
+		
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/deleteLocationByAdmin/{locationId}", method = RequestMethod.POST)
+	public int deleteLocation(@PathVariable int locationId) {
+		
+		return locDao.deleteLocation(locationId);
+		
+	}
+	@CrossOrigin
+	@RequestMapping(value = "/deleteUserByAdmin/{email}", method = RequestMethod.POST)
+	public int deleteUserByAdmin(@PathVariable String email) {
+		
+		
+		
+		return dao.deleteUser(email);
+		
+		
+		
+	}
+	
+	@CrossOrigin
 	@RequestMapping(value = "/genLocations", method = RequestMethod.GET)
 	public int genLocations() {
 //		LocationList newLocations = new LocationList();

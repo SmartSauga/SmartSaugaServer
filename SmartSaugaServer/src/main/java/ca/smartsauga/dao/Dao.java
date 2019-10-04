@@ -216,6 +216,29 @@ public class Dao {
 		
 		return modUser;
 	}
+	
+	public CitizenUser updateUserByAdmin(String email, String type, String status) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		
+		
+		Query query1 = session.createQuery("Update User set type=:type where email=:email");
+		query1.setParameter("type",type);
+		query1.setParameter("email",email);
+		query1.executeUpdate();
+		
+		Query query2 = session.createQuery("Update User set status=:status where email=:email");
+		query2.setParameter("status",status);
+		query2.setParameter("email",email);
+		query2.executeUpdate();
+		
+		session.getTransaction().commit();
+		session.close();
+		
+		
+		return getValidatedUser(email);
+		
+	}
 	public boolean deleteCitizenUser(CitizenUser cu) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
@@ -250,4 +273,17 @@ public class Dao {
 		session.close();
 		return 1;
 	}
+	
+	public int deleteUser(String email) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		Query query1 = session.createQuery("DELETE  FROM User WHERE email=:email");
+		query1.setParameter("email",email);
+		query1.executeUpdate();
+		session.getTransaction().commit();
+		session.close();
+		return 1;
+	}
+	
 }
