@@ -237,10 +237,11 @@ public class LocationDao {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
-		Query query1 = session.createQuery("DELETE  FROM Locations WHERE locationId=:locationId");
+		Query query1 = session.createQuery("DELETE  FROM Locations WHERE locationId =:locationId");
 		query1.setParameter("locationId",locationId);
 		query1.executeUpdate();
-		Query query2 = session.createQuery("DELETE  FROM LocationDataStatus WHERE locationId=:locationId");
+		
+		Query query2 = session.createQuery("DELETE  FROM LocationDataStatus WHERE locationId =:locationId");
 		query2.setParameter("locationId",locationId);
 		query2.executeUpdate();
 		
@@ -248,5 +249,7 @@ public class LocationDao {
 		session.close();
 		return 1;
 	}
+	
+	
 
 }

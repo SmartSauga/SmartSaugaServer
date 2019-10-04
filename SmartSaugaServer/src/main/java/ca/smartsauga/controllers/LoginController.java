@@ -86,6 +86,8 @@ public class LoginController {
 		
 	}
 	
+	
+	//updateuser iteration2
 	@CrossOrigin
 	@RequestMapping(value = "/updateProfile/{email}/{type}/{status}", method = RequestMethod.POST)
 	public CitizenUser updateUserProfileByAdmin(@PathVariable String email, @PathVariable String type, @PathVariable String status) {
@@ -99,6 +101,8 @@ public class LoginController {
 		
 	}
 	
+	//delete location Iteration 2
+	
 	@CrossOrigin
 	@RequestMapping(value = "/deleteLocationByAdmin/{locationId}", method = RequestMethod.POST)
 	public int deleteLocation(@PathVariable int locationId) {
@@ -106,6 +110,8 @@ public class LoginController {
 		return locDao.deleteLocation(locationId);
 		
 	}
+	
+	//delete user Iteration 2
 	@CrossOrigin
 	@RequestMapping(value = "/deleteUserByAdmin/{email}", method = RequestMethod.POST)
 	public int deleteUserByAdmin(@PathVariable String email) {
