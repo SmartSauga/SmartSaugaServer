@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ca.smartsauga.beans.CitizenUser;
 import ca.smartsauga.beans.LocationDataStatus;
 import ca.smartsauga.beans.Locations;
+import ca.smartsauga.beans.ReportedProblems;
 import ca.smartsauga.beans.User;
 import ca.smartsauga.dao.Dao;
 import ca.smartsauga.dao.LocationDao;
@@ -23,11 +24,16 @@ import ca.smartsauga.utilities.PasswordController;
 
 @RestController
 public class LoginController {
-	
+	// dao object
 	Dao dao = new Dao();
+	
+	//locationDao object
 	LocationDao locDao = new LocationDao();
+	
+	//PasswordController object
 	PasswordController passwordController = new PasswordController();
 	
+	//Creating a new citizen user 
 	@CrossOrigin
 	@RequestMapping(value = "/registerUser/{email}/{password}/{firstname}/{lastname}/{status}/{type}/{birthday}", method = RequestMethod.POST)
 	public int registerCitizenUser(@PathVariable String email, @PathVariable String password, @PathVariable String firstname,@PathVariable String lastname, @PathVariable String status, @PathVariable String type, @PathVariable String birthday) {
@@ -46,6 +52,7 @@ public class LoginController {
 		
 	}
 	
+	// login verification for admin. 
 	@CrossOrigin
 	@RequestMapping(value = "/adminLogin/{email}/{password}", method = RequestMethod.POST)
 	public boolean adminLogin(@PathVariable String email, @PathVariable String password) {
@@ -71,6 +78,7 @@ public class LoginController {
 		
 	}
 	
+	//update user profile by user itself
 	@CrossOrigin
 	@RequestMapping(value = "/updateProfile/{email}/{firstname}/{lastname}/{birthdate}", method = RequestMethod.POST)
 	public CitizenUser updateProfile(@PathVariable String email, @PathVariable String firstname, @PathVariable String lastname, @PathVariable String birthdate) {
@@ -87,22 +95,17 @@ public class LoginController {
 	}
 	
 	
-	//updateuser iteration2
+	//update user by admin
 	@CrossOrigin
 	@RequestMapping(value = "/updateProfile/{email}/{type}/{status}", method = RequestMethod.POST)
-	public CitizenUser updateUserProfileByAdmin(@PathVariable String email, @PathVariable String type, @PathVariable String status) {
-		
+	public CitizenUser updateUserProfileByAdmin(@PathVariable String email, @PathVariable String type, @PathVariable String status) {	
 		
 		return dao.updateUserByAdmin(email, type, status);
-		
 	
-		
-		
 		
 	}
 	
-	//delete location Iteration 2
-	
+	//delete location by admin
 	@CrossOrigin
 	@RequestMapping(value = "/deleteLocationByAdmin/{locationId}", method = RequestMethod.POST)
 	public int deleteLocation(@PathVariable int locationId) {
@@ -111,33 +114,26 @@ public class LoginController {
 		
 	}
 	
-	//delete user Iteration 2
+	//delete user by admin
 	@CrossOrigin
 	@RequestMapping(value = "/deleteUserByAdmin/{email}", method = RequestMethod.POST)
 	public int deleteUserByAdmin(@PathVariable String email) {
-		
-		
-		
 		return dao.deleteUser(email);
-		
-		
-		
 	}
 	
+	//generate all locations in database
 	@CrossOrigin
 	@RequestMapping(value = "/genLocations", method = RequestMethod.GET)
 	public int genLocations() {
-//		LocationList newLocations = new LocationList();
+
 		List<Locations> locations = new ArrayList<Locations>();
-//		locations = newLocations.locations();
+
 		for(Locations l : locations) {
 			dao.addLocation(l);
 		}
-		
-		return 1;
-		
+		return 1;	
 	}
-	
+	//validate user for login verification
 	@CrossOrigin
 	@RequestMapping(value = "/validateUser/{email}/{password}", method = RequestMethod.POST)
 	public boolean validateUser(@PathVariable String email, @PathVariable String password) {
@@ -153,6 +149,7 @@ public class LoginController {
 		}
 	}
 	
+	//validate user for front end 
 	@CrossOrigin
 	@RequestMapping(value = "/returnValidateUser/{email}", method = RequestMethod.POST)
 	public CitizenUser getValidatedUserForFront(@PathVariable String email) {
@@ -183,6 +180,7 @@ public class LoginController {
 //	}
 	//**********************************
 	
+	//locations display
 	@CrossOrigin
 	@RequestMapping(value = "/GetLocations", method = RequestMethod.GET)
 	public List<Locations> getLocations() {
@@ -191,11 +189,13 @@ public class LoginController {
 		
 	}
 	
+	//location status data display
 	@CrossOrigin
 	@RequestMapping(value = "/GetLocationData", method = RequestMethod.GET)
 	public List<LocationDataStatus> getLocationDataStatusList(){
 		return dao.getAllLocationsData();
 	}
+	
 	// this will get user  data for admin without the password
 	@CrossOrigin
 	@RequestMapping(value = "/GetUserData", method = RequestMethod.GET)
@@ -241,6 +241,7 @@ public class LoginController {
 //	}
 //
 	
+	//creating a new location and adding it to database
 	@CrossOrigin
 	@RequestMapping(value = "/ADMINCreateLocation/{name}/{address}/{wifiRating}/{locRating}/{category}/{longitude}/{latitude}/{ipAddress}/{macAddress}/{description}/{downloadSpeed}/{uploadSpeed}/{ping}/{status}", 
 	method = RequestMethod.POST)
@@ -279,17 +280,17 @@ public class LoginController {
 	
 	}
 	
-	//Curate Location - Need Validation to ensure admin is sending this mapping
-	@CrossOrigin
-	@RequestMapping(value = "/ADMINCurateLocation/{id}/{status}", 
-	method = RequestMethod.POST)
-	public int adminCurateLocation(@PathVariable String id, @PathVariable String status) {
-		
-		LocationStatus thisStatus = LocationStatus.toStatus(status);
-		//locDao.curateLocation(id, thisStatus);
-		return 0;
-	
-	}
+//	//Curate Location - Need Validation to ensure admin is sending this mapping
+//	@CrossOrigin
+//	@RequestMapping(value = "/ADMINCurateLocation/{id}/{status}", 
+//	method = RequestMethod.POST)
+//	public int adminCurateLocation(@PathVariable String id, @PathVariable String status) {
+//		
+//		LocationStatus thisStatus = LocationStatus.toStatus(status);
+//		//locDao.curateLocation(id, thisStatus);
+//		return 0;
+//	
+//	}
 	
 	//Remove Location - Need Validation to ensure Admin is sending this mapping
 		@CrossOrigin
@@ -359,4 +360,18 @@ public class LoginController {
 		
 	}
 	
-}
+	//This method submits user's reports to the report database.
+	@CrossOrigin
+	@RequestMapping(value = "/submitProblem/{locationName}/{problemType}/{severity}/{problemDescription}", method = RequestMethod.POST)
+	public int reportAProblem(@PathVariable String locationName, @PathVariable String problemType, @PathVariable String severity, @PathVariable String problemDescription) {
+		ReportedProblems problem = new ReportedProblems(locationName, problemType, severity, problemDescription,"Submitted");
+		try{
+			dao.reportProblem(problem);
+			return 1;
+		}catch(Exception e) {
+			return 0;
+		}
+		}
+	}
+	
+

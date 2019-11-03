@@ -38,9 +38,6 @@ public class Locations  {
 	private String category;
 	
 
-	
-	
-
 	public Locations(String name, String address, double longitude, double latitude, double locationRating, double wifiRating,
 			String category) {
 		this.name = name;

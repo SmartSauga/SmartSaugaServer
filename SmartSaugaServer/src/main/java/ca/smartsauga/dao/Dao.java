@@ -11,6 +11,7 @@ import org.hibernate.cfg.Configuration;
 import ca.smartsauga.beans.CitizenUser;
 import ca.smartsauga.beans.LocationDataStatus;
 import ca.smartsauga.beans.Locations;
+import ca.smartsauga.beans.ReportedProblems;
 import ca.smartsauga.beans.User;
 import ca.smartsauga.utilities.PasswordController;
 
@@ -286,4 +287,12 @@ public class Dao {
 		return 1;
 	}
 	
+	//save the problem in the database
+	public void reportProblem(ReportedProblems problem) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.save(problem);
+		session.getTransaction().commit();
+		session.close();
+	}
 }
