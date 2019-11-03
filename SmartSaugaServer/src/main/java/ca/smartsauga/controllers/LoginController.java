@@ -363,13 +363,13 @@ public class LoginController {
 	//This method submits user's reports to the report database.
 	@CrossOrigin
 	@RequestMapping(value = "/submitProblem/{locationName}/{problemType}/{severity}/{problemDescription}", method = RequestMethod.POST)
-	public int reportAProblem(@PathVariable String locationName, @PathVariable String problemType, @PathVariable String severity, @PathVariable String problemDescription) {
+	public String reportAProblem(@PathVariable String locationName, @PathVariable String problemType, @PathVariable String severity, @PathVariable String problemDescription) {
 		ReportedProblems problem = new ReportedProblems(locationName, problemType, severity, problemDescription,"Submitted");
 		try{
 			dao.reportProblem(problem);
-			return 1;
+			return "success";
 		}catch(Exception e) {
-			return 0;
+			return e.getMessage();
 		}
 		}
 	}
