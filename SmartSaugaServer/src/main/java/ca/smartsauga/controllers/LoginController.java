@@ -387,7 +387,7 @@ public class LoginController {
 	
 	//feedback/ratings by user
 	@CrossOrigin
-	@RequestMapping(value = "/userFeedback/{id}/{feedbackComment}/{rating}/{email}", method = RequestMethod.POST)
+	@RequestMapping(value = "/userFeedback/{feedbackComment}/{rating}/{email}", method = RequestMethod.POST)
 	public int userRating( @PathVariable String feedbackComment, @PathVariable int rating, @PathVariable String email) {
 		CitizenUser cu = dao.getValidatedUser(email);
 		if(cu.getHasRated() == "No") {
