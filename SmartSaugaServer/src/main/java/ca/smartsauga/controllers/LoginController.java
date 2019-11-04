@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ca.smartsauga.beans.CitizenUser;
+import ca.smartsauga.beans.Feedback;
 import ca.smartsauga.beans.LocationDataStatus;
 import ca.smartsauga.beans.Locations;
 import ca.smartsauga.beans.ReportedProblems;
@@ -280,17 +281,6 @@ public class LoginController {
 	
 	}
 	
-//	//Curate Location - Need Validation to ensure admin is sending this mapping
-//	@CrossOrigin
-//	@RequestMapping(value = "/ADMINCurateLocation/{id}/{status}", 
-//	method = RequestMethod.POST)
-//	public int adminCurateLocation(@PathVariable String id, @PathVariable String status) {
-//		
-//		LocationStatus thisStatus = LocationStatus.toStatus(status);
-//		//locDao.curateLocation(id, thisStatus);
-//		return 0;
-//	
-//	}
 	
 	//Remove Location - Need Validation to ensure Admin is sending this mapping
 		@CrossOrigin
@@ -371,7 +361,45 @@ public class LoginController {
 		}catch(Exception e) {
 			return e.getMessage();
 		}
+	}
+	//Delete the problem reported by the user by system admin
+	@CrossOrigin
+	@RequestMapping(value = "/deleteReportedProblem/{id}", method = RequestMethod.POST)
+	public String deleteAReportedProblem(@PathVariable int id) {
+		try {
+			dao.deleteProblem(id);
+			return "Success";
+		}catch(Exception e) {
+			return e.getMessage();
 		}
 	}
+	//change the status of problem by admin
+	@CrossOrigin
+	@RequestMapping(value = "/deleteReportedProblem/{id}/{problemStatus}", method = RequestMethod.POST)
+	public String changeProblemStatusByAdmin(@PathVariable int id, @PathVariable String problemStatus) {
+		try {
+			dao.changeStatusOfReport(id, problemStatus);
+			return "Success";
+		}catch(Exception e) {
+			return e.getMessage();
+		}
+	}
+	
+	//feedback/ratings by user
+	@CrossOrigin
+	@RequestMapping(value = "/userFeedback/{id}/{feedbackComment}/{rating}/{email}", method = RequestMethod.POST)
+	public int userRating( @PathVariable String feedbackComment, @PathVariable int rating, @PathVariable String email) {
+		CitizenUser cu = dao.getValidatedUser(email);
+		if(cu.getHasRated() == "No") {
+			Feedback feedback = new Feedback(feedbackComment, rating);
+			dao.addFeedBack(feedback);
+			return 1;
+		}else {
+			return 0;
+		}
+		
+	}
+	
+}
 	
 

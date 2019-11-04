@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import ca.smartsauga.beans.CitizenUser;
+import ca.smartsauga.beans.Feedback;
 import ca.smartsauga.beans.LocationDataStatus;
 import ca.smartsauga.beans.Locations;
 import ca.smartsauga.beans.ReportedProblems;
@@ -295,4 +296,47 @@ public class Dao {
 		session.getTransaction().commit();
 		session.close();
 	}
+	//delete the problem by system admin
+	public void deleteProblem(int id) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("DELETE  FROM ReportedProblems WHERE id=:id");
+		query.setParameter("id",id);
+		query.executeUpdate();
+		session.getTransaction().commit();
+		session.close();
+	}
+	//change the status of problem by admin
+	public void changeStatusOfReport(int id, String problemStatus) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("Update ReportedProblems set problemStatus=:problemStatus where id=:id");
+		query.setParameter("problemStatus",problemStatus);
+		query.setParameter("id",id);
+		query.executeUpdate();
+		session.getTransaction().commit();
+		session.close();
+		
+	}
+	
+
+	public void addFeedBack(Feedback feedback) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.save(feedback);
+		session.getTransaction().commit();
+		session.close();
+	}
+	
+	public void voterHasRated(String hasVoted, String email) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("Update User set hasVoted=:hasVoted where email=:email");
+		query.setParameter("hasVoted",hasVoted);
+		query.setParameter("email",email);
+		query.executeUpdate();
+		session.getTransaction().commit();
+		session.close();
+	}
+	
 }

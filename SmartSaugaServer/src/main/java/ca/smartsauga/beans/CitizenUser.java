@@ -2,6 +2,7 @@ package ca.smartsauga.beans;
 
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -29,11 +30,13 @@ public class CitizenUser extends User {
 		this.status = status;
 	}
 	
+	private String hasRated;
 	
 	public CitizenUser(int id, String firstname, String lastname, String email, String userBirthdate, String type, String status) {
 		this.userBirthdate = userBirthdate;
 		this.status = status;
 	}
+	
 	
 	
 }
