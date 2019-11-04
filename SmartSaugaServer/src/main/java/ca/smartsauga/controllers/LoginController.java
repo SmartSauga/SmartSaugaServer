@@ -138,8 +138,9 @@ public class LoginController {
 	@CrossOrigin
 	@RequestMapping(value = "/validateUser/{email}/{password}", method = RequestMethod.POST)
 	public boolean validateUser(@PathVariable String email, @PathVariable String password) {
-		if(dao.getValidatedUser(email) != null) {
-			if(passwordController.encrypt(password).contentEquals(dao.getValidatedUser(email).getPassword())) {
+		CitizenUser cuser = dao.getValidatedUser(email);
+		if(cuser != null && cuser.getStatus().equalsIgnoreCase("Approved")) {
+			if(passwordController.encrypt(password).contentEquals(cuser.getPassword())) {
 				System.out.println(dao.getValidatedUser(email).getEmail());
 				return true;
 			}else {
