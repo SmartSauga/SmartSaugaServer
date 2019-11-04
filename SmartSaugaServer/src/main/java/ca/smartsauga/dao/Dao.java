@@ -328,7 +328,7 @@ public class Dao {
 		session.close();
 	}
 	
-	public void voterHasRated(String hasRated, String email) {
+	public void userHasRated(String hasRated, String email) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Query query = session.createQuery("Update User set hasRated=:hasRated where email=:email");
