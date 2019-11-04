@@ -33,6 +33,7 @@
 		<mapping class="ca.smartsauga.beans.Locations" />
 		<mapping class="ca.smartsauga.beans.LocationDataStatus" />
 		<mapping class="ca.smartsauga.beans.ReportedProblems" />
+		<mapping class="ca.smartsauga.beans.Feedback" />
 		<!-- <mapping class="ca.smartsauga.beans.CityLocations" /> -->
 		<!-- <mapping class="ca.smartsauga.beans.CorporateLocation" /> -->
 
