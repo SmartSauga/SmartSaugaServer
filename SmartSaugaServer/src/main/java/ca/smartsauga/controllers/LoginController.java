@@ -394,9 +394,9 @@ public class LoginController {
 			Feedback feedback = new Feedback(feedbackComment, rating);
 			dao.addFeedBack(feedback);
 			dao.userHasRated("Yes", email);
-			return cu.getHasRated();
+			return "User successfully submitted the feedback";
 		}else {
-			return cu.getEmail();
+			return "User cannot submit the feedback";
 		}
 		
 	}
