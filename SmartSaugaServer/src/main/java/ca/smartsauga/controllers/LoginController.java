@@ -393,6 +393,7 @@ public class LoginController {
 		if(cu.getHasRated() == "No" || cu.getHasRated().equalsIgnoreCase("No")) {
 			Feedback feedback = new Feedback(feedbackComment, rating);
 			dao.addFeedBack(feedback);
+			dao.voterHasRated("Yes", email);
 			return cu.getHasRated();
 		}else {
 			return cu.getEmail();
