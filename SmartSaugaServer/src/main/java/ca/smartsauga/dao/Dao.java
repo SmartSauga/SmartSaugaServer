@@ -332,7 +332,7 @@ public class Dao {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Query query = session.createQuery("Update User set hasRated=:hasRated where email=:email");
-		query.setParameter("hasVoted",hasRated);
+		query.setParameter("hasRated",hasRated);
 		query.setParameter("email",email);
 		query.executeUpdate();
 		session.getTransaction().commit();
