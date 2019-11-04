@@ -388,14 +388,14 @@ public class LoginController {
 	//feedback/ratings by user
 	@CrossOrigin
 	@RequestMapping(value = "/userFeedback/{feedbackComment}/{rating}/{email}", method = RequestMethod.POST)
-	public int userRating( @PathVariable String feedbackComment, @PathVariable int rating, @PathVariable String email) {
+	public String userRating( @PathVariable String feedbackComment, @PathVariable int rating, @PathVariable String email) {
 		CitizenUser cu = dao.getValidatedUser(email);
-		if(cu.getHasRated() == "No") {
+		if(cu.getHasRated() == "No" || cu.getHasRated().equalsIgnoreCase("No")) {
 			Feedback feedback = new Feedback(feedbackComment, rating);
 			dao.addFeedBack(feedback);
-			return 1;
+			return cu.getHasRated();
 		}else {
-			return 0;
+			return cu.getEmail();
 		}
 		
 	}
