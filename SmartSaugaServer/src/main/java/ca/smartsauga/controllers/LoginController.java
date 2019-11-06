@@ -397,6 +397,18 @@ public class LoginController {
 		
 	}
 	
+	//change internet status 
+	@CrossOrigin
+	@RequestMapping(value = "/changeInternetStatus/{locationId}/{status}", method = RequestMethod.POST)
+	public int changeInternetStatus(@PathVariable int locationId, @PathVariable String status) {
+		try{
+			return locDao.changeLocationDataIot(locationId, status);
+		
+		}catch(Exception e) {
+			return 0;
+		}
+	}
+	
 }
 	
 

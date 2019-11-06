@@ -250,6 +250,24 @@ public class LocationDao {
 		return 1;
 	}
 	
+	public int changeLocationDataIot(int locationId, String status) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		
+		Query query1 = session.createQuery("Update LocationDataStatus set status=:status where locationId=:locationId");
+		query1.setParameter("status",status);
+		query1.setParameter("locationId",locationId);
+		query1.executeUpdate();
+		
+	
+		
+		session.getTransaction().commit();
+		session.close();
+		
+		
+		return 1;
+	}
+	
 	
 
 }
