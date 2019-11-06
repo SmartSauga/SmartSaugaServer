@@ -245,22 +245,17 @@ public class LoginController {
 	
 	//creating a new location and adding it to database
 	@CrossOrigin
-	@RequestMapping(value = "/ADMINCreateLocation/{name}/{address}/{wifiRating}/{locRating}/{category}/{longitude}/{latitude}/{ipAddress}/{macAddress}/{description}/{downloadSpeed}/{uploadSpeed}/{ping}/{status}", 
+	@RequestMapping(value = "/ADMINCreateLocation/{name}/{address}/{category}/{longitude}/{latitude}/{ipAddress}/{macAddress}/{description}/{downloadSpeed}/{uploadSpeed}/{ping}/{status}", 
 	method = RequestMethod.POST)
-	public int adminCreateLocation(@PathVariable String name,@PathVariable String address, 
-			@PathVariable String wifiRating, @PathVariable String locRating, @PathVariable String category, 
+	public int adminCreateLocation(@PathVariable String name,@PathVariable String address,  @PathVariable String category, 
 			@PathVariable String longitude, @PathVariable String latitude, @PathVariable String ipAddress, 
 			@PathVariable String macAddress,@PathVariable String description, @PathVariable String downloadSpeed, 
 			@PathVariable String uploadSpeed, @PathVariable String ping,  @PathVariable String status) {
 		try {
 			double numLongitude = Double.parseDouble(longitude);
 			double numLatitude = Double.parseDouble(latitude);
-			double numLocRating = Integer.parseInt(locRating);
-			double numWifiRating = Integer.parseInt(wifiRating);
-			
-			
-			Locations  createdLoc = new Locations(name, address, numLongitude, numLatitude, numLocRating, 
-					numWifiRating,category);
+	
+			Locations  createdLoc = new Locations(name, address, numLongitude, numLatitude, category);
 //			
 			int res1 = locDao.addNewLocation(createdLoc);
 			

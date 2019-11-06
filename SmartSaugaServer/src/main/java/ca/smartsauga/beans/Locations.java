@@ -27,25 +27,17 @@ public class Locations  {
 	
 	@Column(nullable=false)
 	private double latitude;
-	
-	@Column(name="location_rating")
-	private double locationRating;
-	
-	@Column(name="wifi_rating")
-	private double wifiRating;
-	
+		
 	@Column(name="category", nullable=false)
 	private String category;
 	
 
-	public Locations(String name, String address, double longitude, double latitude, double locationRating, double wifiRating,
-			String category) {
+	public Locations(String name, String address, double longitude, double latitude,String category) {
 		this.name = name;
 		this.address = address;
 		this.longitude = longitude;
 		this.latitude = latitude;
-		this.locationRating = locationRating;
-		this.wifiRating  = wifiRating;
+		
 		this.category = category;
 		
 		
