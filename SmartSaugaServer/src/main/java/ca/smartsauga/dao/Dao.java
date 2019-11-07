@@ -319,6 +319,17 @@ public class Dao {
 		
 	}
 	
+	public List<ReportedProblems> getAllProblems() {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		//get location  object for this one ======pending
+		Query query = session.createQuery("from ReportedProblems");
+		List<ReportedProblems> problemList = (List<ReportedProblems>)query.getResultList();
+		session.getTransaction().commit();
+		session.close();
+		return problemList;
+	}
+	
 
 	public void addFeedBack(Feedback feedback) {
 		Session session = sessionFactory.openSession();

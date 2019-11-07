@@ -371,7 +371,7 @@ public class LoginController {
 	}
 	//change the status of problem by admin
 	@CrossOrigin
-	@RequestMapping(value = "/deleteReportedProblem/{id}/{problemStatus}", method = RequestMethod.POST)
+	@RequestMapping(value = "/changeProblemStatus/{id}/{problemStatus}", method = RequestMethod.POST)
 	public String changeProblemStatusByAdmin(@PathVariable int id, @PathVariable String problemStatus) {
 		try {
 			dao.changeStatusOfReport(id, problemStatus);
@@ -379,6 +379,12 @@ public class LoginController {
 		}catch(Exception e) {
 			return e.getMessage();
 		}
+	}
+	//get all problems
+	@CrossOrigin
+	@RequestMapping(value = "/getAllProblems", method = RequestMethod.GET)
+	public List<ReportedProblems> getAllReportedProblems() {
+		return dao.getAllProblems();
 	}
 	
 	//feedback/ratings by user
