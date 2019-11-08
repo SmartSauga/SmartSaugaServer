@@ -81,7 +81,7 @@ public class LoginController {
 	
 	//update user profile by user itself without password
 	@CrossOrigin
-	@RequestMapping(value = "/updateProfileWithoutPassword/{email}/{firstname}/{lastname}/{birthdate}/{password}", method = RequestMethod.POST)
+	@RequestMapping(value = "/updateProfileWithoutPassword/{email}/{firstname}/{lastname}/{birthdate}", method = RequestMethod.POST)
 	public CitizenUser updateProfile(@PathVariable String email, @PathVariable String firstname, @PathVariable String lastname, @PathVariable String birthdate,@PathVariable String password) {
 		
 		CitizenUser user = dao.getValidatedUser(email);
