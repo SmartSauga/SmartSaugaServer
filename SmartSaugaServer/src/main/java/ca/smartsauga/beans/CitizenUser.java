@@ -22,12 +22,13 @@ public class CitizenUser extends User {
 	
 	
 	private String status;
-	public CitizenUser(String firstname, String lastname, String email, String password, String userBirthdate, String status, String type) {
+	public CitizenUser(String firstname, String lastname, String email, String password, String userBirthdate, String status, String type, String hasRated) {
 		super(email, password, firstname, lastname, type);
 		// TODO Auto-generated constructor stub
 //		this.address = address;
 		this.userBirthdate = userBirthdate;
 		this.status = status;
+		this.hasRated = hasRated;
 	}
 	
 	private String hasRated;
@@ -35,6 +36,7 @@ public class CitizenUser extends User {
 	public CitizenUser(int id, String firstname, String lastname, String email, String userBirthdate, String type, String status) {
 		this.userBirthdate = userBirthdate;
 		this.status = status;
+		
 	}
 	
 	

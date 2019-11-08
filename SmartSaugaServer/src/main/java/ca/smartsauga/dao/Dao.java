@@ -145,6 +145,9 @@ public class Dao {
 		
 	}
 	
+	public String encryptPasswordForUpdate(String password) {
+		return passwordController.encrypt(password);
+	}
 	
 	
 	//returns email for checking if user exists
@@ -210,6 +213,10 @@ public class Dao {
 		
 		if(!cu.getUserBirthdate().isEmpty()) {
 			modUser.setUserBirthdate(cu.getUserBirthdate().trim());
+		}
+		
+		if(!cu.getPassword().isEmpty()) {
+			modUser.setPassword(cu.getPassword().trim());
 		}
 		
 
