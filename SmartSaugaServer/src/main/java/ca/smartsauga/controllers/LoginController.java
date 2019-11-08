@@ -79,9 +79,9 @@ public class LoginController {
 		
 	}
 	
-	//update user profile by user itself
+	//update user profile by user itself without password
 	@CrossOrigin
-	@RequestMapping(value = "/updateProfile/{email}/{firstname}/{lastname}/{birthdate}/{password}", method = RequestMethod.POST)
+	@RequestMapping(value = "/updateProfileWithoutPassword/{email}/{firstname}/{lastname}/{birthdate}/{password}", method = RequestMethod.POST)
 	public CitizenUser updateProfile(@PathVariable String email, @PathVariable String firstname, @PathVariable String lastname, @PathVariable String birthdate,@PathVariable String password) {
 		
 		CitizenUser user = dao.getValidatedUser(email);
@@ -89,13 +89,28 @@ public class LoginController {
 		user.setFirstname(firstname);
 		user.setLastname(lastname);
 		user.setUserBirthdate(birthdate);
-		if(!password.isEmpty() || !password.isBlank() || !password.equalsIgnoreCase("") || !password.equalsIgnoreCase(" ")) {
-			user.setPassword(dao.encryptPasswordForUpdate(password));
-		}
 		
-		return dao.updateUserProfile(user);
+		
+		return dao.updateUserProfileWithoutPassword(user);
 		
 	}
+	//update user profile by user with password itself
+		@CrossOrigin
+		@RequestMapping(value = "/updateProfileWithPassword/{email}/{firstname}/{lastname}/{birthdate}/{password}", method = RequestMethod.POST)
+		public CitizenUser updateProfileWithPass(@PathVariable String email, @PathVariable String firstname, @PathVariable String lastname, @PathVariable String birthdate,@PathVariable String password) {
+			
+			CitizenUser user = dao.getValidatedUser(email);
+			System.out.println(user.getEmail());
+			user.setFirstname(firstname);
+			user.setLastname(lastname);
+			user.setUserBirthdate(birthdate);
+			
+			user.setPassword(dao.encryptPasswordForUpdate(password));
+			
+			
+			return dao.updateUserProfile(user);
+			
+		}
 	
 	
 	//update user by admin

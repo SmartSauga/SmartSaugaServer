@@ -226,6 +226,33 @@ public class Dao {
 		return modUser;
 	}
 	
+	public CitizenUser updateUserProfileWithoutPassword(CitizenUser cu) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		
+
+		CitizenUser modUser = (CitizenUser) session.get(CitizenUser.class, cu.getUserId());
+		if(!cu.getFirstname().isEmpty()) {
+			modUser.setFirstname(cu.getFirstname().trim());
+		}
+		
+		if(!cu.getLastname().isEmpty()) {
+			modUser.setLastname(cu.getLastname().trim());
+		}
+		
+		if(!cu.getUserBirthdate().isEmpty()) {
+			modUser.setUserBirthdate(cu.getUserBirthdate().trim());
+		}
+		
+		
+		
+
+		session.getTransaction().commit();
+		session.close();
+		
+		return modUser;
+	}
+	
 	public CitizenUser updateUserByAdmin(String email, String type, String status) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
