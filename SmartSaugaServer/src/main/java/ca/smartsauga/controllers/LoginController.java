@@ -407,15 +407,15 @@ public class LoginController {
 	//feedback/ratings by user
 	@CrossOrigin
 	@RequestMapping(value = "/userFeedback/{feedbackComment}/{rating}/{email}", method = RequestMethod.POST)
-	public String userRating( @PathVariable String feedbackComment, @PathVariable int rating, @PathVariable String email) {
+	public boolean userRating( @PathVariable String feedbackComment, @PathVariable int rating, @PathVariable String email) {
 		CitizenUser cu = dao.getValidatedUser(email);
 		if(cu.getHasRated() == "No" || cu.getHasRated().equalsIgnoreCase("No")) {
 			Feedback feedback = new Feedback(feedbackComment, rating);
 			dao.addFeedBack(feedback);
 			dao.userHasRated("Yes", email);
-			return "User successfully submitted the feedback";
+			return true;
 		}else {
-			return "User cannot submit the feedback";
+			return false;
 		}
 		
 	}
